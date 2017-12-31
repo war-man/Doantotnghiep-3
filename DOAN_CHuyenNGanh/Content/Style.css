@@ -18,10 +18,18 @@ body {
     overflow: hidden;
     z-index: 1;
 }
+.navbar {
+    background: linear-gradient(180deg, #3498DB 0%, #3DB1FF 50%, #3498DB 100%);
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
 .btn_SetMark1 {
     height: 90%;
-    text-align:center;
-    
+    text-align: center;
     top: 20px;
     bottom: 20px;
     left: 20px;

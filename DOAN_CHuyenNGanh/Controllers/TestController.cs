@@ -61,6 +61,7 @@ namespace IdentitySample.Controllers
             {
             
                 var user = await _dbContext.Users.Include(a=>a.Roles).FirstOrDefaultAsync(e => e.Email == model.Email);
+                
                 return Ok(user);
 
             }
