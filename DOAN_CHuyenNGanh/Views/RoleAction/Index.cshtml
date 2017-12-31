@@ -1,0 +1,70 @@
+﻿@model IdentitySample.Models.RoleActionViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+           
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Role)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @foreach (var items in Model.ActionRolesList)
+                {
+                    if (item.Id == items.Text)
+                    {
+                        <input data-role-id="@item.Id"  type="checkbox" name="SelectedRole" value="@items.Value" checked="@items.Selected" class="checkbox-inline js-toggle-action" />
+                        @Html.Label(items.Value, new { @class = "control-label textaction" })
+                    }
+
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+           
+       
+            $('.js-toggle-action').change(function () {
+                if (!this.checked) {
+                    var inputVal = $(this).attr('data-role-id') + " " + $(this).attr('value');
+                    var returnVal = confirm("Are you sure?" );
+                    console.log(inputVal);
+                    $.post("/api/Deleteaction", { RoleAction: inputVal }).done(function () {
+                        window.location.replace("http://localhost:56466/RoleAction");
+                        alert("Đã xóa quyền Action");
+                    }).fail(function () {
+                        alert("Lỗi");
+                    });
+                }
+           
+            });
+        });
+
+    </script>    
+}
+
+

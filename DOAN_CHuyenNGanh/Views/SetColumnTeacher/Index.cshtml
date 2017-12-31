@@ -1,0 +1,136 @@
+﻿@model DOAN_CHuyenNGanh.Models.SetColumnContactViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.Raw(TempData["msg"])
+    <div class="form-horizontal">
+        <label  name="@Model.applicationUser" id="UserId">aa</label>
+        <h4>SetColumnContact</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.mark_5m,"Nhập cột điểm 5 phút", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mark_5m, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "5" } })
+                @Html.ValidationMessageFor(model => model.mark_5m, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mark_15m, "Nhập cột điểm 15 phút", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mark_15m, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "5" } })
+                @Html.ValidationMessageFor(model => model.mark_15m, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mark_45m, "Nhập cột điểm 45 phút", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mark_45m, new { htmlAttributes = new { @class = "form-control", @min = "1", @max = "4" } })
+                @Html.ValidationMessageFor(model => model.mark_45m, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Năm học</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.YearId, new SelectList(Model.Year, "Id", "Name"), new { @class = "form-control" ,@id="yearid"})
+            </div>
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+           
+            
+            
+        </div>
+}
+
+<div>
+    <table class="table-bordered" style="width:100%">
+        <thead>
+            <tr style="background-color:azure" class="header-table">
+                <th id="name_5m" colspan="5">Điểm Kiểm Tra Miệng</th>
+                <th id="name_15m" colspan="5">Điểm Kiểm Tra 15'</th>
+                <th id="name_45m" colspan="4">Điểm Kiểm Tra 45'</th>
+                <th>Điểm Thi Học Kỳ</th>
+                <th>Điểm Thi Trung Bình</th>
+
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var label = $('#UserId');
+            var id = label.attr('name');
+            var year = $('#yearid option:selected').val();
+            var column = {
+                TeacherId: id,
+                YearId: year
+            };
+            $.ajax({
+                type: "POST",
+                data: column,
+                url: "/api/GetColumn"
+            }).done(function (res) {
+                $("#mark_5m").val(res["mark_5m"]);
+                $("#mark_15m").val(res["mark_15m"]);
+                $("#mark_45m").val(res["mark_45m"]);
+                addRow();
+                });
+
+        
+         
+            $("#mark_5m").change(function () {
+                addRow();
+
+            });
+            $("#mark_15m").change(function () {
+                addRow();
+
+            });
+            $("#mark_45m").change(function () {
+                addRow();
+
+            });
+            function addRow() {
+                var x1 = $("#mark_5m").val();
+                var x2 = $("#mark_15m").val();
+                var x3 = $("#mark_45m").val();
+                $(".table-bordered tbody > tr").remove();
+                let html = "<tr>";
+                $("#name_5m").attr('colspan', x1);
+                $("#name_15m").attr('colspan', x2);
+                $("#name_45m").attr('colspan', x3);
+                for (var i = 0; i < x1; i++) {
+                    var temp = i + 1;
+                    html = html + "<td>" + "Cột " + temp  + "</td>";
+
+                }
+                for (let i = 0; i < x2; i++) {
+                    var temp = i + 1;
+                    html = html + "<td>" + "Cột " + temp  + "</td>";
+
+                }
+                for (let i = 0; i < x3; i++) {
+                    var temp = i + 1;
+                    html = html + "<td>" + "Cột " + temp + "</td>";
+
+                }
+                html = html + "<td></td><td></td></tr>"
+                $(".table-bordered >tbody").append(html);
+            };
+        });
+</script>
+
+
+}

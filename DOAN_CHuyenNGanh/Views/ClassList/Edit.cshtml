@@ -1,0 +1,156 @@
+﻿@model DOAN_CHuyenNGanh.Models.ContactViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @{ int temp = 0;}
+    @foreach (var item in Model.Contact)
+    {
+
+        if (temp < 1)
+        {
+                    <label class="SubjectId" for="@item.SubjectId">Môn @item.Subject.name_Subject </label>
+                    <label class="ClassId" for="@item.CLassId">Lớp @item.CLass.name_Class </label>
+                    <label class="SemesterId"  for="@item.SemesterId"> @item.Semester.Name </label>
+                    <label class="YearId"  for="@item.YearId"> @item.Year.Name </label>
+
+            temp++;
+        }
+    }
+    <table class="table-bordered" style="width:100%">
+        <tr style="background-color:azure" class="header-table">
+            <th class="col-lg-3">Môn Học</th>
+            <th id="mark_5m" colspan="@Model.SetColumnContact.mark_5m">Điểm Kiểm Tra Miệng</th>
+            <th id="mark_15m" colspan="@Model.SetColumnContact.mark_15m">Điểm Kiểm Tra 15'</th>
+            <th id="mark_45m" colspan="@Model.SetColumnContact.mark_45m">Điểm Kiểm Tra 45'</th>
+            <th>Điểm Thi Học Kỳ</th>
+            <th>Điểm Thi Trung Bình</th>
+           
+        </tr>
+   
+        @foreach (var item in Model.Contact)
+        {
+            <tr>
+                <td><label class="col-lg-6">@item.Student.firstname_Student</label></td>
+
+                <td id="row5m_1" hidden><input class="form-control input-group-sm @item.Student.Id+mark_5m1" name="@item.Student.Id+mark_5m1" for="@item.Student.Id+mark_5m1" id="@item.Student.Id" type="text" value="@item.mark_5m1" ></td>
+                <td id="row5m_2" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m2" for="@item.Student.Id+mark_5m2" id="@item.Student.Id" type="text" value="@item.mark_5m2" ></td>
+                <td id="row5m_3" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m3" for="@item.Student.Id+mark_5m3" id="@item.Student.Id" type="text" value="@item.mark_5m3" ></td>
+                <td id="row5m_4" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m4" for="@item.Student.Id+mark_5m4" id="@item.Student.Id" type="text" value="@item.mark_5m4" ></td>
+                <td id="row5m_5" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m5" for="@item.Student.Id+mark_5m5" id="@item.Student.Id" type="text" value="@item.mark_5m5" ></td>
+
+                <td id="row15m_1" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m1" for="@item.Student.Id+mark_15m1" id="@item.Student.Id" type="text" value="@item.mark_15m1" ></td>
+                <td id="row15m_2" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m2" for="@item.Student.Id+mark_15m2" id="@item.Student.Id" type="text" value="@item.mark_15m2" ></td>
+                <td id="row15m_3" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m3" for="@item.Student.Id+mark_15m3" id="@item.Student.Id" type="text" value="@item.mark_15m3" ></td>
+                <td id="row15m_4" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m4" for="@item.Student.Id+mark_15m4" id="@item.Student.Id" type="text" value="@item.mark_15m4" ></td>
+                <td id="row15m_5" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m5" for="@item.Student.Id+mark_15m5" id="@item.Student.Id" type="text" value="@item.mark_15m5" ></td>
+               
+                <td id="row45m_1" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m1" for="@item.Student.Id+mark_45m1" id="@item.Student.Id" type="text" value="@item.mark_45m1" ></td>
+                <td id="row45m_2" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m2" for="@item.Student.Id+mark_45m2" id="@item.Student.Id" type="text" value="@item.mark_45m2" ></td>
+                <td id="row45m_3" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m3" for="@item.Student.Id+mark_45m3" id="@item.Student.Id" type="text" value="@item.mark_45m3" ></td>
+                <td id="row45m_4" hidden><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m4" for="@item.Student.Id+mark_45m4" id="@item.Student.Id" type="text" value="@item.mark_45m4" ></td>
+               
+                <td><input class="form-control input-group-sm" name="@item.Student.Id+mark_subjects" for="@item.Student.Id+mark_subjects" id="@item.Student.Id" type="text" value="@item.mark_subjects" ></td>   
+            </tr>
+        }
+     
+    </table>
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+            
+                var label = $('.SubjectId');
+                var SubjectId = label.attr('for');
+                var label = $('.ClassId');
+                var ClassId = label.attr('for');
+                var label = $('.SemesterId');
+                var SemesterId = label.attr('for');
+                var label = $('.YearId');
+                var YearId = label.attr('for');
+            
+                function addmrak(studentid)
+                {
+                    var mark_5m1 = $("input[name='" + studentid + "+mark_5m1']").val();
+                    var mark_5m2 = $("input[name='" + studentid + "+mark_5m2']").val();
+                    var mark_5m3 = $("input[name='" + studentid + "+mark_5m3']").val();
+                    var mark_5m4 = $("input[name='" + studentid + "+mark_5m4']").val();
+                    var mark_5m5 = $("input[name='" + studentid + "+mark_5m5']").val();
+                    var mark_15m1 = $("input[name='" + studentid + "+mark_15m1']").val();
+                    var mark_15m2 = $("input[name='" + studentid + "+mark_15m2']").val();
+                    var mark_15m3 = $("input[name='" + studentid + "+mark_15m3']").val();
+                    var mark_15m4 = $("input[name='" + studentid + "+mark_15m4']").val();
+                    var mark_15m5 = $("input[name='" + studentid + "+mark_15m5']").val();
+                    var mark_45m1 = $("input[name='" + studentid + "+mark_45m1']").val();
+                    var mark_45m2 = $("input[name='" + studentid + "+mark_45m2']").val();
+                    var mark_45m3 = $("input[name='" + studentid + "+mark_45m3']").val();
+                    var mark_45m4 = $("input[name='" + studentid + "+mark_45m4']").val();
+                    var contact = {
+                        ClassId: ClassId, SubjectId: SubjectId, YearId: YearId, SemesterId: SemesterId, StudentId: studentid,
+                        mark_5m1: mark_5m1,
+                        mark_5m2: mark_5m2,
+                        mark_5m3: mark_5m3,
+                        mark_5m4: mark_5m4,
+                        mark_5m5: mark_5m5,
+                        mark_15m1: mark_15m1,
+                        mark_15m2: mark_15m2,
+                        mark_15m3: mark_15m3,
+                        mark_15m4: mark_15m4,
+                        mark_15m5: mark_15m5,
+                        mark_45m1: mark_45m1,
+                        mark_45m2: mark_45m2,
+                        mark_45m3: mark_45m3,
+                        mark_45m4: mark_45m4
+                    };
+              
+                    return contact;
+                }
+
+
+
+                $("input[type='text']").change(function () {
+                    var studentid = $(this).attr('id');
+                    var mark = $(this).val();
+                    var idmrak = $(this).attr('name');
+                  
+                    var contact =  addmrak(studentid);                 
+                    var x;
+                    for (x in contact) {
+                       
+                            x = idmrak;
+                            contact[x] = mark;
+                
+                        
+                    }                  
+                    $.ajax({
+                        type: "POST",
+                        data: contact,
+                        url: "/api/Contact"
+                    }).done(function (res) {
+                        alert("Đẵ lưu " + mark+" vào cột điểm");
+                    });
+                });
+                   
+            });
+            var label = $('#mark_5m');
+            var mark_5m = label.attr('colspan');
+            var label = $('#mark_15m');
+            var mark_15m = label.attr('colspan');
+            var label = $('#mark_45m');
+            var mark_45m = label.attr('colspan');
+            for (var i = 1; i <= mark_5m; i++)
+            {
+                $("tr >#row5m_"+i+"").show();
+            }
+            for (var i = 1; i <= mark_15m; i++) {
+                $("tr >#row15m_" + i + "").show();
+            }
+            for (var i = 1; i <= mark_45m; i++) {
+                $("tr >#row45m_" + i + "").show();
+            }
+        </script>
+    }
+    
+</div>
+

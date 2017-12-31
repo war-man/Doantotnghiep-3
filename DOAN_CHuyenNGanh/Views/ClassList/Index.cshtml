@@ -1,0 +1,61 @@
+﻿@model DOAN_CHuyenNGanh.Models.ClassListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<h2>Index</h2>
+<div class="container">
+   
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+            <h4 >Giáo viên bô môn @Model.Teacher.Subject.name_Subject </h4>
+        </div>
+        <div class="panel-body">
+            <div  class="form-group">
+                <label>Họ và Tên: </label>@Model.Teacher.name_Teacher
+            </div>
+            <div  class="form-group">
+                <label >Giới tính:</label>
+                @if (@Model.Teacher.sex)
+                {
+                    <label>Nam</label> 
+                }
+                @if (!@Model.Teacher.sex)
+                {
+                   <label> Nữ</label>
+                }
+               
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ:</label>@Model.Teacher.address
+            </div>
+            <div class="form-group">
+                <label>Giáo viên chủ nhiệm lớp:</label>@*@Model.Teacher.Class.name_Class*@
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        
+        <label>Năm học</label>
+        @Html.DropDownListFor(m => m.YearId, new SelectList(Model.Year, "Id", "Name"), "", new { @class = "form-control" })
+
+        <label>Năm học</label>
+        @Html.DropDownListFor(m => m.SemesterId, new SelectList(Model.Semester, "Id", "Name"), "", new { @class = "form-control" })
+
+        <label>Năm học</label>
+        @Html.DropDownListFor(m => m.ClassId, new SelectList(Model.ClassTeacher, "Class.Id", "Class.name_Class"), "", new { @class = "form-control" })
+
+        <button type="submit">submit</button>
+    </div>
+    
+
+
+</div>
+
+}
