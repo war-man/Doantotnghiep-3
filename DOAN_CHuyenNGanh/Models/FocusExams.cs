@@ -15,27 +15,25 @@ namespace DOAN_CHuyenNGanh.Models
 
         public string Name { get; set; }
 
-        public string Location { get; set; }
-        public string Grade { get; set; }
+        public string Mark { get; set; }
 
-        public Student Student { get; set; }
-        [Key]
-        [Column(Order = 2)]
-        public string StudentId { get; set; }
+        public DateTime DateTime { get; set; }
+
+        public string Grade { get; set; }
 
         public Subject Subject { get; set; }
         [Key]
-        [Column(Order = 3)]
+        [Column(Order = 2)]
         public string SubjectId { get; set; }
 
         public Year Year { get; set; }
         [Key]
-        [Column(Order = 4)]
+        [Column(Order = 3)]
         public string YearId { get; set; }
 
         public Semester Semester { get; set; }
         [Key]
-        [Column(Order = 5)]
+        [Column(Order = 4)]
         public string SemesterId { get; set; }
     }
 }

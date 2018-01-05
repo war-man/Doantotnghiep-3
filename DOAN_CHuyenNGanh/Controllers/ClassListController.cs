@@ -26,7 +26,7 @@ namespace DOAN_CHuyenNGanh.Controllers
         public ActionResult SortClassExams()
         {
             var userId = User.Identity.GetUserId();
-            var teacher = _dbContext.Teachers.Where(a => a.ApplicationUser.Id == userId).Single();
+           // var teacher = _dbContext.Teachers.Where(a => a.ApplicationUser.Id == userId).Single();
          
            
 

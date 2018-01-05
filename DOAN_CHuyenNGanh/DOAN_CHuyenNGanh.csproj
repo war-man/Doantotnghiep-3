@@ -220,6 +220,7 @@
     <Compile Include="Controllers\SetColumnTeacherController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -287,6 +288,14 @@
     <Compile Include="Migrations\201712310710020_student21.Designer.cs">
       <DependentUpon>201712310710020_student21.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801011057587_focusexam.cs" />
+    <Compile Include="Migrations\201801011057587_focusexam.Designer.cs">
+      <DependentUpon>201801011057587_focusexam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051047531_focusexamm.cs" />
+    <Compile Include="Migrations\201801051047531_focusexamm.Designer.cs">
+      <DependentUpon>201801051047531_focusexamm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Action.cs" />
@@ -301,10 +310,11 @@
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\DTOs\FocusExamsDTO.cs" />
+    <Compile Include="Models\DTOs\InfoExamsDto.cs" />
     <Compile Include="Models\DTOs\RoleActionDto.cs" />
     <Compile Include="Models\DynamicRoleAuthorizeAttribute.cs" />
     <Compile Include="Models\FocusExams.cs" />
-    <Compile Include="Models\FutureDate.cs" />
+    <Compile Include="Models\Valid\FutureDate.cs" />
     <Compile Include="Models\HomeRoomTeacher.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Parent.cs" />
@@ -320,6 +330,7 @@
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Models\UniqueAttribute.cs" />
+    <Compile Include="Models\Valid\ValidTime.cs" />
     <Compile Include="Models\Year.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -327,7 +338,11 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.table2excel.min.js" />
+    <Content Include="Content\js\tooltip.js" />
     <Content Include="Content\Style.css" />
+    <Content Include="Content\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -474,6 +489,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712310710020_student21.resx">
       <DependentUpon>201712310710020_student21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011057587_focusexam.resx">
+      <DependentUpon>201801011057587_focusexam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051047531_focusexamm.resx">
+      <DependentUpon>201801051047531_focusexamm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

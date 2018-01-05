@@ -3,21 +3,24 @@
 @{
     ViewBag.Title = "SortClassExams";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    @*<script src="//code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
+
 }
 
 <h2>SortClassExams</h2>
 
 
 @Html.ValidationSummary()
-<div class="col-md-4">
+<div class="col-md-4 focusexam">
 
-    <label name="@Model.TeacherId" id="userId">Năm học</label>
-    <input class="form-control" id="nameExam" type="number" placeholder="Nhập tên buổi kiểm tra tập trung" required/>
-    <label>Năm học</label>
-    <input class="form-control" id="location" type="number" placeholder="Nhập phòng buổi kiểm tra tập trung" required/>
-    <label>Năm học</label>
+    <label name="@Model.TeacherId" id="userId">Số học sinh / Phòng thi</label>
+    <input class="form-control" id="location" type="number" title="Nhập số học sinh tối đa cho 1 phòng thi" required />
+    <label>Nhập tên buổi kiểm tra</label>
+    <input class="form-control" id="nameExam" type="text" title="Nhập tên buổi kiểm tra tập trung" required />
+    <label>Chọn ngày thi</label>
+    <input class="form-control" id="date" type="date" title="Ngày thi lớn hơn ngày hiện tại" />
+    <label>Chọn giờ thi</label>
+    <input class="form-control" id="time" type="time" />
+    <label>Chọn khối thi</label>
     <select class='form-control' id='idClass'>
         <option value="10">Khối 10</option>
         <option value="11">Khối 11</option>
@@ -26,10 +29,10 @@
     <label>Năm học</label>
     @Html.DropDownListFor(m => m.YearId, new SelectList(Model.Year, "Id", "Name"), "", new { @class = "form-control" })
 
-    <label>Năm học</label>
+    <label>Chọn học kì</label>
     @Html.DropDownListFor(m => m.SemesterId, new SelectList(Model.Semester, "Id", "Name"), "", new { @class = "form-control" })
 
-    <label>Năm học</label>
+    <label>Chọn môn học</label>
     @Html.DropDownListFor(m => m.SubjectId, new SelectList(Model.Subject, "Id", "name_Subject"), "", new { @class = "form-control" })
     <br>
     <button id="funcNext" class="btn btn-danger">Next</button>
@@ -39,135 +42,233 @@
     </div>
 </div>
 <div class="col-md-8">
+    <button class="btn" id="print"><span class="glyphicon glyphicon-print"></span>In danh sách lớp thi</button>
+    <button class="btn" id="excel"><span class="glyphicon glyphicon-download-alt"></span>Xuất file excel</button>
+    <button class="btn" id="save"><span class="glyphicon glyphicon-saved"></span>Lưu thông tin buổi thi</button>
+</div>
+<div class="col-md-8">
+    <ul class="pagination"></ul>
+
     <div class="listStudent">
 
     </div>
 </div>
-
-@section scripts
+    @section scripts
 {
-    <script>
+        <script src="~/Content/js/jquery.min.js"></script>
+        <script src="~/Content/js/jquery.table2excel.min.js"></script>
+        <script>
 
-        $(document).ready(function () {
-
-            $('#funcNext').click(function () {
-                var label = $('#userId');
-                var id = label.attr('name');
-                var name = $('#nameExam').val();
-                var location = $('#location').val();
-                var year = $('#YearId option:selected').val();
-                var semester = $('#SemesterId option:selected').val();
-                var subject = $('#SubjectId option:selected').val();
-                var classes = $('#idClass option:selected').val();
-                var data1 = {
-                    TeacherId: id,
-                    YearId: year
-                }
-                if (name == "" || year == "" || semester == "" || subject == "" || location == "" || classes == "") {
-                 
-                    alert("Vui Lòng Nhập Đủ Thông Tin");
-                }
-                else {
-                    if (location < 0 || name < 0)
-                        alert("Nhập sai thông tin phòng thi ");
-                    else {
-                        $.post("/api/GetColumn", data1
-
-                            , function (data, status) {
-                                $(".nextStep1 >").remove();
-
-                                alert("Data: " + data["mark_5m"] + data["mark_15m"] + data["mark_45m"] + "\nStatus: " + status);
-                                var html = "<select class='form-control' id='listMark'>";
-                                for (var i = 1; i <= data["mark_5m"]; i++) {
-                                    html = html + " <option value= 'mark_5m" + i + "' > Kiểm tra 5 phút lần " + i + "</option>"
-                                }
-                                for (var i = 1; i <= data["mark_15m"]; i++) {
-                                    html = html + " <option value= 'mark_15m" + i + "' > Kiểm tra 15 phút lần " + i + "</option>"
-                                }
-                                for (var i = 1; i <= data["mark_45m"]; i++) {
-                                    html = html + " <option value= 'mark_45m" + i + "' > Kiểm tra 45 phút lần " + i + "</option>"
-                                }
-                                html = html + "</select><br> <button class='btn btn-info' id='nextStep2'>Next</button>";
-
-                                $(".nextStep1").append(html);
-                                $("#listMark").hide().show("slow");
-
-                            });
+            $(document).ready(function () {
+                $("input[title]").tooltips();
+                $('#funcNext').click(function () {
+                    var d = new Date();
+                    var label = $('#userId');
+                    var id = label.attr('name');
+                    var date = $('#date').val();
+                    var name = $('#nameExam').val();
+                    var location = $('#location').val();
+                    var year = $('#YearId option:selected').val();
+                    var semester = $('#SemesterId option:selected').val();
+                    var subject = $('#SubjectId option:selected').val();
+                    var classes = $('#idClass option:selected').val();
+                    var data1 = {
+                        TeacherId: id,
+                        YearId: year
                     }
-                   
-                }
+                    var day = ("0" + d.getDate()).slice(-2);
+                    var month = ("0" + (d.getMonth() + 1)).slice(-2);
 
-            });
-            $('.nextStep1').on('click', '#nextStep2', function () {
-                var name = $('#nameExam').val();
-                var location = $('#location').val();
-                var year = $('#YearId option:selected').val();
-                var semester = $('#SemesterId option:selected').val();
-                var subject = $('#SubjectId option:selected').val();
-                var listMark = $('#listMark option:selected').val();
-                var classes = $('#idClass option:selected').val();
-                alert(listMark);
-                var focusexams = {
-                    SubjectId: subject,
-                    SemesterId: semester,
-                    Name: name,
-                    Location: location,
-                    YearId: year,
-                    Grade: classes
-                }
-                $.post("/api/GetListStudent", focusexams
+                    var today = d.getFullYear() + "-" + (month) + "-" + (day);
+                    console.log(today);
+                    console.log(date);
+                    console.log(date >= today);
+                    if (name == "" || year == "" || semester == "" || subject == "" || location == "" || classes == "" || date < today) {
 
-                    , function (data, status) {
-                        console.log(data);
-                        $(".listStudent >").remove();
-                        var location = $('#location').val();
-                        var n = 0;
-                        function compare(a, b) {
-                            if (a.Student.lastname_Student < b.Student.lastname_Student)
+                        alert("Vui Lòng Nhập Đủ Thông Tin");
+                    }
+                    else {
+                        if (location < 0 || name < 0)
+                            alert("Nhập sai thông tin phòng thi ");
+                        else {
+                            $.post("/api/GetColumn", data1
+
+                                , function (data, status) {
+                                    $('#funcNext').hide();
+                                    $(".nextStep1 >").remove();
+
+                                    alert("Data: " + data["mark_5m"] + data["mark_15m"] + data["mark_45m"] + "\nStatus: " + status);
+                                    var html = "<select class='form-control' id='listMark'>";
+                                    for (var i = 1; i <= data["mark_5m"]; i++) {
+                                        html = html + " <option value= 'mark_5m" + i + "' > Kiểm tra 5 phút lần " + i + "</option>"
+                                    }
+                                    for (var i = 1; i <= data["mark_15m"]; i++) {
+                                        html = html + " <option value= 'mark_15m" + i + "' > Kiểm tra 15 phút lần " + i + "</option>"
+                                    }
+                                    for (var i = 1; i <= data["mark_45m"]; i++) {
+                                        html = html + " <option value= 'mark_45m" + i + "' > Kiểm tra 45 phút lần " + i + "</option>"
+                                    }
+                                    html = html + "</select><br> <button class='btn btn-info' id='nextStep2'>Next</button>";
+
+                                    $(".nextStep1").append(html);
+                                    $("#listMark").hide().show("slow");
+
+                                });
+                        }
+
+                    }
+
+                });
+                $('.nextStep1').on('click', '#nextStep2', function () {
+                    var name = $('#nameExam').val();
+                    var location = $('#location').val();
+                    var year = $('#YearId option:selected').val();
+                    var semester = $('#SemesterId option:selected').val();
+                    var subject = $('#SubjectId option:selected').val();
+                    var listMark = $('#listMark option:selected').val();
+                    var classes = $('#idClass option:selected').val();
+                    var date = $('#date').val();
+                    var time = $('#time').val();
+                    alert(listMark);
+                    var focusexams = {
+                        SubjectId: subject,
+                        SemesterId: semester,
+                        Name: name,
+                        Location: location,
+                        YearId: year,
+                        Grade: classes
+                    }
+                    $.post("/api/GetListStudent", focusexams
+
+                        , function (data, status) {
+                            $('#nextStep2').hide();
+                            $(".listStudent >").remove();
+                            $(".pagination >").remove();
+                            var location = $('#location').val();
+                            var n = 0;
+                            function compare(a, b) {
+                                if (a.Student.lastname_Student < b.Student.lastname_Student)
                                     return -1;
-                            if (a.Student.lastname_Student > b.Student.lastname_Student)
+                                if (a.Student.lastname_Student > b.Student.lastname_Student)
                                     return 1;
-                            if (a.Student.lastname_Student = b.Student.lastname_Student) {
-                                if (a.Student.firstname_Student < b.Student.firstname_Student)
+                                if (a.Student.lastname_Student = b.Student.lastname_Student) {
+                                    if (a.Student.firstname_Student < b.Student.firstname_Student)
                                         return -1;
-                                if (a.Student.firstname_Student > b.Student.firstname_Student)
+                                    if (a.Student.firstname_Student > b.Student.firstname_Student)
                                         return 1;
                                     return 0;
                                 }
                                 return 0;
                             }
                             data.ClassStudent.sort(compare);
-                        
 
-                        for (let j = 1; j <= data.Class.length; j++) {
-                            let numRoom = j - 1;
-                            var html = "<h2>Danh sách học sinh thi tập trung Phòng " + data.Class[numRoom]["name_Class"] + "</h2><table id='myTable" + j + "' class='table-bordered' style='width: 100%'><tbody><th class='col-md-1'>STT</th><th class='col-md-5'>Họ và Tên học sinh</th><th class='col-md-2'>Tên học sinh</th><th>Lớp</th></tbody ></table>";
-                            $(".listStudent").append(html);
-                      
-                         
 
-                            for (var i = n; i < j * location; i++) {
+
+                            for (let j = 1; j <= data.Class.length; j++) {
+                                let numRoom = j - 1;
+                                var html = "<div hidden id='room" + numRoom + "'><h2>Danh sách học sinh thi tập trung Phòng " + data.Class[numRoom]["name_Class"] + "</h2><table id='myTable" + j + "' class='table-bordered' style='width: 100%'><tbody><th class='col-md-1'>STT</th><th class='col-md-5'>Họ và Tên học sinh</th><th class='col-md-2'>Tên học sinh</th><th>Lớp</th></tbody ></table></div>";
+                                var html2 = '<li><button class="active btn btn-default" name="room' + numRoom + '">' + data.Class[numRoom]["name_Class"] + '</button></li>';
+                                $(".pagination").append(html2);
+                                $(".listStudent").append(html);
+
+
+
+                                for (var i = n; i < j * location; i++) {
+                                    if (i == data.ClassStudent.length)
+                                        break;
+                                    var html2 = "<tr id='column" + i + "'>";
+                                    var temp = i + 1;
+
+                                    html2 = html2 + "<td>" + temp + "</td><td>" + data.ClassStudent[i].Student.firstname_Student + " " + data.ClassStudent[i].Student.lastname_Student + "</td><td>" + data.ClassStudent[i].Student.lastname_Student + "</td><td>" + data.ClassStudent[i].Class.name_Class + "</td>"
+                                    html2 = html2 + "</tr>";
+                                    n = n + 1;
+                                    $("#myTable" + j + "").append(html2);
+                                    $("#column" + i + "").hide().show("slow");
+                                }
                                 if (i == data.ClassStudent.length)
                                     break;
-                                var html2 = "<tr id='column" + i + "'>";
-                                var temp = i + 1;
-
-                                html2 = html2 + "<td>" + temp + "</td><td>" + data.ClassStudent[i].Student.firstname_Student + " " + data.ClassStudent[i].Student.lastname_Student + "</td><td>" + data.ClassStudent[i].Student.lastname_Student + "</td><td>" + data.ClassStudent[i].Class.name_Class + "</td>"
-                                html2 = html2 + "</tr>";
-                                n = n + 1;
-                                $("#myTable" + j + "").append(html2);
-                                $("#column" + i + "").hide().show("slow");
-                                $("#column" + i + "").addClass('angry-animate');
                             }
+                            function HideAllRoom() {
+                                for (let j = 0; j <= data.Class.length; j++) {
+                                    $('#room' + j + '').hide();
+                                }
+                                $('.active').removeClass('btn-primary').addClass('.btn-default');
+                            }
+                            $('.pagination').on('click', '.active', function () {
+                                HideAllRoom();
+                                var room = $(this).attr('name');
+                                $('#' + room + '').show();
+                                $(this).removeClass('btn-default').addClass('btn-primary');
+                            });
+                            function printDiv() {
 
-                        }
+                                var divToPrint = document.getElementsByClassName('listStudent');
+                                console.log(divToPrint[0].innerHTML);
+                                var newWin = window.open('', 'Print-Window');
+
+                                newWin.document.open();
+
+                                newWin.document.write('<html><body onload="window.print()">' + divToPrint[0].innerHTML + '</body></html>');
+
+                                newWin.document.close();
+
+                                setTimeout(function () { newWin.close(); }, 10);
+
+                            }
+                            $('#print').click(function () {
+                                printDiv();
+                            });
+                            $('#excel').click(function () {
+                                alert("");
+                                $("#myTable1").table2excel({
+                                    exclude: "#myTable1",
+                                    name: "Danhsáchthitậptrung",
+                                    filename: "Danhsáchthitậptrung"
+                                });
+                            });
+                            $('#save').click(function () {
+
+                                var name = $('#nameExam').val();
+                                var location = $('#location').val();
+                                var year = $('#YearId option:selected').val();
+                                var semester = $('#SemesterId option:selected').val();
+                                var subject = $('#SubjectId option:selected').val();
+                                var listMark = $('#listMark option:selected').val();
+                                var classes = $('#idClass option:selected').val();
+                                var date = $('#date').val();
+                                var time = $('#time').val();
+                                var r = confirm("Bạn có chắc lưu không!");
+                                if (r == true) {
+                                    var InfoExcams = {
+                                        Name: name,
+                                        Mark: listMark,
+                                        Date: date,
+                                        Time: time,
+                                        Grade: classes,
+                                        SubjectId: subject,
+                                        YearId: year,
+                                        SemesterId: semester
+                                    };
+                                    $.post("/api/PostInfoExams", InfoExcams).done(function (data, status) {
+                                        alert(status);
+                                    }).fail(function (err) {
+                                        alert(err.responseJSON.Message);
+                                    });
+                                     
+                                } else {
+
+                                }
+                            });
+
+
+                        });
 
 
 
-                    });
+                });
 
             });
-        });
 
-    </script>
-}
+        </script>
+        <script src="~/Content/js/tooltip.js"></script>
+    }

@@ -65,7 +65,6 @@ namespace IdentitySample.Models
             modelBuilder.Entity<SetColumnContact>().HasRequired(a => a.Year).WithMany().WillCascadeOnDelete(false);
 
 
-            modelBuilder.Entity<FocusExams>().HasRequired(a => a.Student).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<FocusExams>().HasRequired(a => a.Subject).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<FocusExams>().HasRequired(a => a.Semester).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<FocusExams>().HasRequired(a => a.Year).WithMany().WillCascadeOnDelete(false);
