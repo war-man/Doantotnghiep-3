@@ -23,6 +23,11 @@ namespace DOAN_CHuyenNGanh.Controllers
 
             return View();
         }
+        public ActionResult ListClassExams()
+        {
+            
+            return View(_dbContext.FocusExamses.Include("Semester").Include("Subject").Include("Year").ToList());
+        }
         public ActionResult SortClassExams()
         {
             var userId = User.Identity.GetUserId();

@@ -214,6 +214,7 @@
     <Compile Include="Controllers\CreateStudentController.cs" />
     <Compile Include="Controllers\GetColumnController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IPNController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleActionController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -228,73 +229,9 @@
     <Compile Include="Migrations\201711190631574_InitialCreate.Designer.cs">
       <DependentUpon>201711190631574_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711210627346_students.cs" />
-    <Compile Include="Migrations\201711210627346_students.Designer.cs">
-      <DependentUpon>201711210627346_students.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711210712402_st.cs" />
-    <Compile Include="Migrations\201711210712402_st.Designer.cs">
-      <DependentUpon>201711210712402_st.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711210734216_st1.cs" />
-    <Compile Include="Migrations\201711210734216_st1.Designer.cs">
-      <DependentUpon>201711210734216_st1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711231637032_action.cs" />
-    <Compile Include="Migrations\201711231637032_action.Designer.cs">
-      <DependentUpon>201711231637032_action.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711261924561_Contact.cs" />
-    <Compile Include="Migrations\201711261924561_Contact.Designer.cs">
-      <DependentUpon>201711261924561_Contact.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711270445173_amrk.cs" />
-    <Compile Include="Migrations\201711270445173_amrk.Designer.cs">
-      <DependentUpon>201711270445173_amrk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712061053163_teacher.cs" />
-    <Compile Include="Migrations\201712061053163_teacher.Designer.cs">
-      <DependentUpon>201712061053163_teacher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712100451102_setcolumncontact.cs" />
-    <Compile Include="Migrations\201712100451102_setcolumncontact.Designer.cs">
-      <DependentUpon>201712100451102_setcolumncontact.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712110622257_sercolumn.cs" />
-    <Compile Include="Migrations\201712110622257_sercolumn.Designer.cs">
-      <DependentUpon>201712110622257_sercolumn.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712141656429_focusExam.cs" />
-    <Compile Include="Migrations\201712141656429_focusExam.Designer.cs">
-      <DependentUpon>201712141656429_focusExam.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712161310410_focusExamss.cs" />
-    <Compile Include="Migrations\201712161310410_focusExamss.Designer.cs">
-      <DependentUpon>201712161310410_focusExamss.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712161337186_student.cs" />
-    <Compile Include="Migrations\201712161337186_student.Designer.cs">
-      <DependentUpon>201712161337186_student.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712161444250_student2.cs" />
-    <Compile Include="Migrations\201712161444250_student2.Designer.cs">
-      <DependentUpon>201712161444250_student2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712310633377_teacherhomeroom.cs" />
-    <Compile Include="Migrations\201712310633377_teacherhomeroom.Designer.cs">
-      <DependentUpon>201712310633377_teacherhomeroom.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712310710020_student21.cs" />
-    <Compile Include="Migrations\201712310710020_student21.Designer.cs">
-      <DependentUpon>201712310710020_student21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801011057587_focusexam.cs" />
-    <Compile Include="Migrations\201801011057587_focusexam.Designer.cs">
-      <DependentUpon>201801011057587_focusexam.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051047531_focusexamm.cs" />
-    <Compile Include="Migrations\201801051047531_focusexamm.Designer.cs">
-      <DependentUpon>201801051047531_focusexamm.cs</DependentUpon>
+    <Compile Include="Migrations\201801060605207_updatedatabase.cs" />
+    <Compile Include="Migrations\201801060605207_updatedatabase.Designer.cs">
+      <DependentUpon>201801060605207_updatedatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -309,6 +246,9 @@
     <Compile Include="Models\ClassTeacher.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
+    <Compile Include="Models\csPDTSample.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Models\DTOs\FocusExamsDTO.cs" />
     <Compile Include="Models\DTOs\InfoExamsDto.cs" />
     <Compile Include="Models\DTOs\RoleActionDto.cs" />
@@ -336,6 +276,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\js\jquery.min.js" />
@@ -344,27 +288,58 @@
     <Content Include="Content\Style.css" />
     <Content Include="Content\tooltip.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\additional-methods.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="package.json" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="systemjs-angular-loader.js" />
     <Content Include="systemjs.config.js" />
     <Content Include="Web.config" />
@@ -422,89 +397,36 @@
     <Content Include="Views\SetColumnTeacher\Index.cshtml" />
     <Content Include="Views\ClassList\EditIndex.cshtml" />
     <Content Include="Views\ClassList\SortClassExams.cshtml" />
+    <Content Include="Views\ClassList\ListClassExams.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711190631574_InitialCreate.resx">
-      <DependentUpon>201711190631574_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711210627346_students.resx">
-      <DependentUpon>201711210627346_students.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711210712402_st.resx">
-      <DependentUpon>201711210712402_st.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711210734216_st1.resx">
-      <DependentUpon>201711210734216_st1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711231637032_action.resx">
-      <DependentUpon>201711231637032_action.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711261924561_Contact.resx">
-      <DependentUpon>201711261924561_Contact.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711270445173_amrk.resx">
-      <DependentUpon>201711270445173_amrk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712061053163_teacher.resx">
-      <DependentUpon>201712061053163_teacher.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712100451102_setcolumncontact.resx">
-      <DependentUpon>201712100451102_setcolumncontact.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712110622257_sercolumn.resx">
-      <DependentUpon>201712110622257_sercolumn.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712141656429_focusExam.resx">
-      <DependentUpon>201712141656429_focusExam.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712161310410_focusExamss.resx">
-      <DependentUpon>201712161310410_focusExamss.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712161337186_student.resx">
-      <DependentUpon>201712161337186_student.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712161444250_student2.resx">
-      <DependentUpon>201712161444250_student2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712310633377_teacherhomeroom.resx">
-      <DependentUpon>201712310633377_teacherhomeroom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712310710020_student21.resx">
-      <DependentUpon>201712310710020_student21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801011057587_focusexam.resx">
-      <DependentUpon>201801011057587_focusexam.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051047531_focusexamm.resx">
-      <DependentUpon>201801051047531_focusexamm.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app\app.component.ts" />
-    <TypeScriptCompile Include="app\app.module.ts" />
-    <TypeScriptCompile Include="app\huydep.component.ts" />
-    <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711190631574_InitialCreate.resx">
+      <DependentUpon>201711190631574_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060605207_updatedatabase.resx">
+      <DependentUpon>201801060605207_updatedatabase.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

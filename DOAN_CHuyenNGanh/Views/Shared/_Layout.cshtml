@@ -8,48 +8,72 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/Style.css" rel="stylesheet" />
     <link href="~/Content/tooltip.css" rel="stylesheet" />
-    <script src="~/node_modules/core-js/client/shim.min.js"></script>
     <script src="~/Content/js/jquery.min.js"></script>
-    <script src="~/node_modules/zone.js/dist/zone.js"></script>
-    <script src="~/node_modules/systemjs/dist/system.src.js"></script>
-    <script src="~/systemjs.config.js"></script>
-    <script src="~/Content/js/jquery.table2excel.min.js"></script>
 
-    <script>
-        System.import('app/main.js').catch(function (err) { console.error(err); });
-    </script>
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("HCM-EDU", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-                    }
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+    <nav style="background:orange" class="navbar navbar-expand-lg navbar-light bg-light">
+        @Html.ActionLink("HCM-EDU", "Index", "Home", null, new { @class = "navbar-brand" })
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Contact">Liên hệ</a>
+                </li>
+   
+            </ul>
+            @Html.Partial("_LoginPartial")
         </div>
-    </div>
+    </nav>
+
+
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("HCM-EDU", "Index", "Home", null, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
+                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                        }
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </div>*@
+    <nav class="navbar-primary">
+        <a href="#" class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"><</span></a>
+        <ul class="navbar-primary-menu">
+            <li>
+                <a href="#"><span class="nav-label">Dashboard</span></a>
+                <a href="#"><span class="nav-label">Profile</span></a>
+                <a href="#"><span class="nav-label">Settings</span></a>
+                <a href="#"><span class="nav-label">Notification</span></a>
+                <a href="#"><span class="nav-label">Monitor</span></a>
+            </li>
+        </ul>
+    </nav>
     <div class="container body-content">
+
         @RenderBody()
-        <hr />
+        @*<hr />*@
         @*<footer>
-     
-        
-        </footer>*@
+
+
+            </footer>*@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
@@ -57,3 +81,10 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<script>
+    $(document).ready(function () {
+        $('.btn-expand-collapse').click(function (e) {
+            $('.navbar-primary').toggleClass('collapsed');
+        });
+    });
+</script>
