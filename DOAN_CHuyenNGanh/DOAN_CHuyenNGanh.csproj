@@ -233,6 +233,10 @@
     <Compile Include="Migrations\201801060605207_updatedatabase.Designer.cs">
       <DependentUpon>201801060605207_updatedatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803251109154_action.cs" />
+    <Compile Include="Migrations\201803251109154_action.Designer.cs">
+      <DependentUpon>201803251109154_action.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Action.cs" />
@@ -252,6 +256,7 @@
     <Compile Include="Models\DTOs\FocusExamsDTO.cs" />
     <Compile Include="Models\DTOs\InfoExamsDto.cs" />
     <Compile Include="Models\DTOs\RoleActionDto.cs" />
+    <Compile Include="Models\DTOs\SetActionDTO.cs" />
     <Compile Include="Models\DynamicRoleAuthorizeAttribute.cs" />
     <Compile Include="Models\FocusExams.cs" />
     <Compile Include="Models\Valid\FutureDate.cs" />
@@ -273,6 +278,7 @@
     <Compile Include="Models\Valid\ValidTime.cs" />
     <Compile Include="Models\Year.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\RoleActionsService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -282,6 +288,13 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\admin.png" />
+    <Content Include="Content\Image\icon-down.png" />
+    <Content Include="Content\Image\icon-edit.png" />
+    <Content Include="Content\Image\icon-up.png" />
+    <Content Include="Content\Image\parent.png" />
+    <Content Include="Content\Image\student.png" />
+    <Content Include="Content\Image\teacher.png" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.table2excel.min.js" />
     <Content Include="Content\js\tooltip.js" />
@@ -426,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801060605207_updatedatabase.resx">
       <DependentUpon>201801060605207_updatedatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803251109154_action.resx">
+      <DependentUpon>201803251109154_action.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

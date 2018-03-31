@@ -23,68 +23,70 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Home/Contact">Liên hệ</a>
                 </li>
-   
+
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
+    <div class="wrapper" >
+        <div class="navbar-primary ">
 
+            <ul class="navbar-primary-menu">
+                <li>
+                    <a href="#" id="title-roll"><img width="40" height="40" src="~/Content/Image/admin.png" /><span class="nav-label">Ban giám hiệu</span></a>
+                    <ul class="action-menu"></ul>
+                </li>
 
-
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("HCM-EDU", "Index", "Home", null, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                            <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
-                            <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
-                        }
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
+            </ul>
+            <a class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"><</span></a> 
+        </div>
+            <div class="container body-content">
+                @RenderBody()
             </div>
-        </div>*@
-    <nav class="navbar-primary">
-        <a href="#" class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"><</span></a>
-        <ul class="navbar-primary-menu">
-            <li>
-                <a href="#"><span class="nav-label">Dashboard</span></a>
-                <a href="#"><span class="nav-label">Profile</span></a>
-                <a href="#"><span class="nav-label">Settings</span></a>
-                <a href="#"><span class="nav-label">Notification</span></a>
-                <a href="#"><span class="nav-label">Monitor</span></a>
-            </li>
-        </ul>
-    </nav>
-    <div class="container body-content">
-
-        @RenderBody()
-        @*<hr />*@
-        @*<footer>
+           
+            @*<hr />*@
+            @*<footer>
 
 
             </footer>*@
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
 </body>
 </html>
 <script>
     $(document).ready(function () {
+        getAction();
         $('.btn-expand-collapse').click(function (e) {
             $('.navbar-primary').toggleClass('collapsed');
         });
+        $('#set-action-roll').click(function (e) {
+            $('.action-roll-menu').is(':visible') ? $('.action-roll-menu').hide(200) : $('.action-roll-menu').show(200);
+
+        });
+
     });
+    function getAction() {
+        //$.get("/RoleAction/GetActionRole", function (data) {
+        //    console.log(data);
+
+        //});
+        $.ajax({
+            url: '/RoleAction/GetActionRole',
+            type: "GET",
+            success: function (result) {
+                console.log(result);
+                var data =JSON.parse(result);
+                for (let i = 0; i < data.length; i++) {
+                    setLayoutAction(data[i].Action);
+                }
+            }
+        });
+    }
+    function setLayoutAction(element) {
+        console.log(element);
+        var html = '<li><a id="test" href= "' + element.Url + '"><span class="nav-label">' + element.Name + '</span></a> <div id="setting-menu"><button class="btn-setting-action"><img width="20" height="20" src="/Content/Image/icon-up.png" /></button><button class="btn-setting-action"><img width="20" height="20" src="/Content/Image/icon-down.png" />';
+        $('.action-menu').append(html);
+    }
 </script>

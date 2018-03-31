@@ -1,4 +1,6 @@
 ﻿using DOAN_CHuyenNGanh.Models;
+using DOAN_CHuyenNGanh.Models.DTOs;
+using DOAN_CHuyenNGanh.Service;
 using IdentitySample.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -6,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +18,7 @@ namespace DOAN_CHuyenNGanh.Controllers
     [DynamicRoleAuthorize]
     public class RoleActionController : Controller
     {
+        private RoleActionsService _roleactionservice = null;
         private ApplicationDbContext _dbContext = null;
         private ApplicationRoleManager _roleManager;
         public ApplicationRoleManager RoleManager
@@ -43,6 +47,7 @@ namespace DOAN_CHuyenNGanh.Controllers
         public RoleActionController()
         {
             _dbContext = new ApplicationDbContext();
+            _roleactionservice = new RoleActionsService();
         }
         // GET: RoleAction
         public ActionResult Index()
@@ -121,6 +126,33 @@ namespace DOAN_CHuyenNGanh.Controllers
             }
             ModelState.AddModelError("", "Something failed.");
             return View();
+        }
+
+        public async Task<JsonResult> GetActionRole()
+        {
+          
+            try
+            {
+                var UserId = User.Identity.GetUserId();
+                if (UserId == null)
+                {
+                    return Json(HttpStatusCode.BadRequest);
+                }
+                var userIdentity = (ClaimsIdentity)User.Identity;
+                var claims = userIdentity.Claims;
+                var roleClaimType = userIdentity.RoleClaimType;
+                var roles = claims.Where(c => c.Type == ClaimTypes.Role).ToList();
+                //SetActionDTO setActionDTO = new SetActionDTO
+                //{
+                //    GetRoleAction = _roleactionservice.GetRoleAction(role.Id)
+                //};
+                //setActionDTO.SetListRole();
+                return Json(_roleactionservice.GetRoleAction("1"), "sucsses", JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                return Json("fail", JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

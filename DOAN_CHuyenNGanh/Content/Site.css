@@ -2,9 +2,8 @@
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    margin-left:20%;
     position:absolute;
-    display:inline-block;
+    display:inline;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */

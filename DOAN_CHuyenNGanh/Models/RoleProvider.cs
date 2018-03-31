@@ -16,7 +16,7 @@ namespace DOAN_CHuyenNGanh.Models
             // wherever you want such as db
             // I hardcoded for the sake of simplicity 
             var temp = controller + action;
-        
+            string url = "/" + controller + "/" + action;
             var role= _dbContext.RoleActions.Where(a => a.ActionId == temp).Select(a => a.Role.Name).ToList();
             var roles = _dbContext.Actions.Any(a => a.Id == temp);
             if (roles)
@@ -34,7 +34,7 @@ namespace DOAN_CHuyenNGanh.Models
                 {
                     Id = temp,
                     Name=temp,
-                    
+                    Url= url
                 };
                 var roleaction = new RoleAction
                 {
