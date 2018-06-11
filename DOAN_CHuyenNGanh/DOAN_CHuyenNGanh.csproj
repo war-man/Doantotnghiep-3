@@ -1183,6 +1183,7 @@
     <Content Include="Views\ManageTeacher\Schedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ApiApp\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

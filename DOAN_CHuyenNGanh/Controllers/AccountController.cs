@@ -25,7 +25,7 @@ namespace IdentitySample.Controllers
             SignInManager = signInManager;
         }
 
-        private ApplicationUserManager _userManager;
+        public ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
             get
@@ -47,7 +47,7 @@ namespace IdentitySample.Controllers
             return View();
         }
 
-        private ApplicationSignInManager _signInManager;
+        public ApplicationSignInManager _signInManager;
 
         public ApplicationSignInManager SignInManager
         {

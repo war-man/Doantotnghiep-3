@@ -106,6 +106,7 @@ namespace DOAN_CHuyenNGanh.Controllers
                         // add completed
                         tran.Commit();
                         UserManager.AddPassword(teacherAccount.Id, teacherViewModel.passWord);
+                        UserManager.AddToRoles(teacherAccount.Id, "Teacher");
                         return Json(new
                         { result = new { resultCode = "10", message = "Tạo tài khoản và thông tin giáo viên thành công" } }, JsonRequestBehavior.AllowGet);
                     }
@@ -140,7 +141,7 @@ namespace DOAN_CHuyenNGanh.Controllers
                 {
                     try
                     {
-                        Teacher teacherChangeInfomation = _dbContext.Teachers.SingleOrDefault(a => a.Id == teacherViewModel.Id);
+                        Teacher teacherChangeInfomation = _dbContext.Teachers.Include("ApplicationUser").SingleOrDefault(a => a.Id == teacherViewModel.Id);
                         //Thong tin ca nhan
                         teacherChangeInfomation.Id = teacherViewModel.Id;
                         teacherChangeInfomation.name_Teacher = teacherViewModel.name_Teacher;
