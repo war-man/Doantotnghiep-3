@@ -1,10 +1,7 @@
 ﻿
-input.form-control {
-    height: 100%;
-}
 
     input.form-control:focus {
-        border-color: #FF0000;
+        border-color: #e36209;
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
     }
 .template_1 {
@@ -28,15 +25,16 @@ body {
     padding: 0;
     margin: 0;
 }
-.wrapper {
+/*.wrapper {
     padding: 50px 0;
+    z-index:1;
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-     padding: 55px 0 0 0;
-}
+     padding: 60px 0 0 0;
+}*/
 
 /*.navbar {
     background: linear-gradient(180deg, #3498DB 0%, #3DB1FF 50%, #3498DB 100%);
@@ -269,7 +267,6 @@ body {
         background-color:white;
     }
     .btn-expand-collapse {
-        position: absolute;
         display: block;
         left: 0px;
         bottom: 0;
@@ -333,13 +330,14 @@ body {
 .collapsed + .main-content {
     margin-left: 60px;
 }
-ul.action-menu {
+ul.show-action-menu {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: auto;
-    height:700px;
-    font-weight:bold;
+    height: auto;
+    font-weight: bold;
+    border-bottom: solid 2px #e36209 !important;
 }
 .btn-setting-action{
     width:30px;
@@ -347,4 +345,10 @@ ul.action-menu {
     background-color:white;
     border:1px double #e36209;
     float:right;
+}
+#notification-new {
+    border: solid 2px #d1d5da;
+    box-shadow: 2px 4px #888888;
+    background-color:transparent;
+    
 }

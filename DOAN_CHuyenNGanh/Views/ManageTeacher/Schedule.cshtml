@@ -1,0 +1,148 @@
+﻿@model DOAN_CHuyenNGanh.Models.Teacher
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+</style>
+<div>
+    <h4>Lịch giảng dạy</h4>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <hr />
+    <div class="col-md-12 row">
+        <div class="col-md-4">
+            <label for="nameTeacher">GIáo Viên:</label>
+            <label id="idTeacher" hidden>@Html.DisplayFor(model => model.Id)</label>
+            <h4 id="nameTeacher">@Html.DisplayFor(model => model.name_Teacher)</h4>
+        </div>
+        <div class="col-md-4">
+            <label for="Semester">Học kỳ:</label>
+            <select id="Semester" class="form-control">
+                <option value="1">Học kỳ I</option>
+                <option value="2">Học kỳ II</option>
+                <option value="3">Học kỳ III</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="Year">Năm học:</label>
+            <select id="Year" class="form-control">
+                <option value="20172018">2017 - 2018</option>
+                <option value="20182019">2018 - 2019</option>
+                <option value="20192020">2019 - 2020</option>
+            </select>
+        </div>
+    </div>
+    <hr />
+    <div style="text-align:center">
+        <button id="dayweeks2" onclick="GetSchedule(2)" class="col-md-1 btn btn-warning">Thứ 2</button>
+        <button id="dayweeks3" onclick="GetSchedule(3)" class="col-md-1 btn btn-warning">Thứ 3</button>
+        <button id="dayweeks4" onclick="GetSchedule(4)" class="col-md-1 btn btn-warning">Thứ 4</button>
+        <button id="dayweeks5" onclick="GetSchedule(5)" class="col-md-1 btn btn-warning">Thứ 5</button>
+        <button id="dayweeks6" onclick="GetSchedule(6)" class="col-md-1 btn btn-warning">Thứ 6</button>
+        <button id="dayweeks7" onclick="GetSchedule(7)" class="col-md-1 btn btn-warning">Thứ 7</button>
+    </div>
+    
+    <hr />
+    <table>
+        <tr>
+            <th>Thứ</th>
+            <th>Buổi</th>
+            <th>Tiết TKB</th>
+            <th>Lớp</th>
+        </tr>
+        <tr>
+            <td rowspan="12"><h1 id="dayweeks" style="text-align:center">2</h1></td>
+            <td rowspan="5">Sáng</td>
+            <td>1</td>
+            <td  class="Class-Lesson-1"><select class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td class="Class-Lesson-2"><select  class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td  class="Class-Lesson-3"><select  class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td  class="Class-Lesson-4"><select class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td class="Class-Lesson-5"><select  class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td rowspan="5">Chiều</td>
+            <td>6</td>
+            <td  class="Class-Lesson-6"><select  class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td  class="Class-Lesson-7"><select class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td  class="Class-Lesson-8"><select class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td  class="Class-Lesson-9"><select  class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td  class="Class-Lesson-10"><select  class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td rowspan="5">Tối</td>
+            <td>11</td>
+            <td class="Class-Lesson-11"><select  class="form-control Class"></select></td>
+        </tr>
+        <tr>
+            <td>12</td>
+            <td class="Class-Lesson-12"><select   class="form-control Class"></select></td>
+        </tr>
+    </table>
+    <hr />
+    <button class="col-md-12 btn btn-primary">Lưu Lịch</button>
+</div>
+<script>
+    $(document).ready(function () {
+        $.get("/api/CommonApi/GetClass", function (data) {
+            let html = '<option selected></option>';
+            data.forEach(function (entry) {
+                html = html + '<option value="' + entry.Id + '">' + entry.name_Class+'</option>'
+                console.log(entry);
+            });
+            $('.Class').append(html);
+        });
+
+    });
+    
+    function GetSchedule(stt) {
+        let idTeacher = $('#idTeacher').html();
+        let Semester = $("#Semester").val();
+        let Year =$("#Year").val();
+        let dayweeks = $('#dayweeks').html();
+        let data = {
+            idTeacher: idTeacher,
+            Semester: Semester,
+            Year: Year,
+            dayweeks: dayweeks
+        }
+        console.log(data);
+        $.post("/api/CommonApi/GetSchedule", data, function (result) {
+            console.log(result);
+        });
+    }
+</script>

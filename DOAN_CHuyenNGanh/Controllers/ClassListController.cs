@@ -102,7 +102,7 @@ namespace DOAN_CHuyenNGanh.Controllers
                     }
                                        
                 }
-                var list = _dbContext.Contacts.Include("Class").Include("Semester").Include("Year").Where(a => a.CLassId == contact.CLassId && a.SubjectId == teacher.Subject.Id && a.SemesterId == contact.SemesterId && a.YearId == contact.YearId).ToList();
+                var list = _dbContext.Contacts.Include("Student").Include("Class").Include("Semester").Include("Year").Where(a => a.CLassId == contact.CLassId && a.SubjectId == teacher.Subject.Id && a.SemesterId == contact.SemesterId && a.YearId == contact.YearId).ToList();
                 TempData["list"] = list;
                 return RedirectToAction("Edit");
       

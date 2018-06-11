@@ -1,9 +1,12 @@
-﻿
+﻿hr {
+    background-color: #e36209;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     position:absolute;
-    display:inline;
+    display:inline-block;
+    width:80%;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -36,4 +39,25 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+.login-form {
+    width:400px;
+    position: absolute;
+    left: 40%;
+}
+.btn-main {
+    border: solid 1px #d1d5da;
+    background-color:white;
+}
+.btn-main1 {
+    border: solid 1px #e36209;
+    background-color: white;
+    border-radius: 6%;
+    color: #586069;
+    background-image: url(icon/add-new-icon.png);
+    background-position: center center;
+    background-size: 5em;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
 }

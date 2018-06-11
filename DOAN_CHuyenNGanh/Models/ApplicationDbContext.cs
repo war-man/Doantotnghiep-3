@@ -21,6 +21,7 @@ namespace IdentitySample.Models
         public DbSet<FocusExams> FocusExamses { get; set; }
         public DbSet<HomeRoomTeacher> HomeRoomTeachers { get; set; }
         public DbSet<ClassStudent> ClassStudent { get; set; }
+        public DbSet<ScheduleTeacher> ScheduleTeacher { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -48,6 +49,7 @@ namespace IdentitySample.Models
             modelBuilder.Entity<Contact>().HasRequired(a => a.Year).WithMany().WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<Teacher>().HasRequired(a=>a.Class).WithMany().WillCascadeOnDelete(false);
+            
 
             //modelBuilder.Entity<ClassTeacher>().HasRequired(a => a.Class).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<ClassTeacher>().HasRequired(a => a.Teacher).WithMany().WillCascadeOnDelete(false);

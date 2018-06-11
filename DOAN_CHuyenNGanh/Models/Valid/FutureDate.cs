@@ -12,7 +12,7 @@ namespace DOAN_CHuyenNGanh.Models
         public override bool IsValid(object value)
         {
             DateTime date;
-            var isValid = DateTime.TryParseExact(Convert.ToString(value), "dd/MM/yyyy", CultureInfo.InvariantCulture,DateTimeStyles.None,out date);
+            var isValid = DateTime.TryParseExact(Convert.ToString(value), "yyyy-MM-dd", CultureInfo.InvariantCulture,DateTimeStyles.None,out date);
             return (isValid && date<DateTime.Now);
         }
     }

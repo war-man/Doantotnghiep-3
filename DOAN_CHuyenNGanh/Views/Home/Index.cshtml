@@ -1,3 +1,150 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style></style>
+<div class="container-fluid">
+    <div class="col-md-12" style="text-align:center; width:100%;height:400px ;position:relative;">
+        <button class="col-lg-3" id="notification-new" style="background-image:url('../../Content/Image/notifica-icon.png');background-repeat:no-repeat !important; background-position:center center;background-size:10em;width:300px; height: 300px;display:inline-block; position:relative">
+            <span style="display:block ;position: absolute;top:0;">Thông báo đến tài khoản admin</span>
+        </button>
+        <button class="col-lg-3" id="notification-new" style="background-image:url('../../Content/Image/100-orange-Emoji.png');background-repeat:no-repeat !important; background-position:center center; background-size:10em;width:300px; height: 300px;display:inline-block; position:relative">
+            <span style="display:block ;position: absolute;top:0;">Điểm số</span>
+        </button>
+        <button class="col-lg-3" id="notification-new" style="background-image:url('../../Content/Image/charts-512.png');background-repeat:no-repeat !important; background-position:center center;width:300px; height: 300px;display:inline-block; position:relative">
+            <span style="display:block ;position: absolute;top:0;">Thống kê</span>
+        </button>
+        <button class="col-lg-3" id="notification-new" style="background-image:url('../../Content/Image/Envelope.png');background-repeat:no-repeat !important; background-position:center center; width:300px; height: 300px;display:inline-block; position:relative">
+            <span style="display:block ;position: absolute;top:0;">Thông tin liên lạc</span>
+        </button>
+    </div>
+    <div class="col-md-12" style="height:400px ;position:relative;">
+        <div class="col-md-4" id="container" style="width:400px; height: 400px;display:inline-block;bottom:0;"></div>
+        <div class="col-md-4" id="container-circle" style="height: 400px;display:inline-block;bottom:0;"></div>
+        <div class="col-md-4" id="notification-new" style=" height: 400px;display:inline-block;bottom:0;">
+            <div style="display:block ;position: absolute;top:0;">
+                <p>Thông báo mới của nhà trường</p>
+                <a href="#"><p>Thông báo 1</p></a>
+                <a href="#"><p>Thông báo 2</p></a>
+                <a href="#"><p>Thông báo 3</p></a>
+                <a href="#"><p>Thông báo 4</p></a>
+                <a href="#"><p>Thông báo 5</p></a>
+                <a href="#"><p>Thông báo 6</p></a>
+                <a href="#"><p>Thông báo 7</p></a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    
+Highcharts.chart('container', {
+    chart: {
+        type: 'column',
+        width: 300
+    },
+    title: {
+        text: 'Lượt người truy cập web site'
+    },
+    xAxis: {
+        categories: [
+            'Thứ 2',
+            'Thứ 3',
+            'Thứ 4',
+            'Thứ 5',
+            'Thứ 6',
+            'Thứ 7',
+            'Chủ Nhật'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Lượt người truy cập web site'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.1,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Phụ Huynh',
+        data: [50, 70, 100, 129, 144, 176, 135]
+
+    }, {
+        name: 'Giáo Viên',
+        data: [83, 78, 98, 93, 106, 84, 105]
+
+    }, {
+        name: 'Học Sinh',
+        data: [48, 38, 39, 41, 47, 48, 59]
+
+    }, {
+        name: 'Khách',
+        data: [42, 33, 34, 39, 52, 75, 57]
+
+    }]
+    });
+
+    Highcharts.chart('container-circle', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie',
+            width: 400
+        },
+        title: {
+            text: 'Thống kê xếp loại'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Giỏi',
+                y: 80.0,
+                sliced: true,
+                selected: true
+            }, {
+                    name: 'Tiên tiến',
+                y: 15.0
+            }, {
+                    name: 'Trung bình',
+                y: 3.0
+            }, {
+                    name: 'Yếu',
+                y: 1.0
+            }, {
+                    name: 'Kém',
+                y: 1.0
+            }]
+        }]
+    });
+</script>
