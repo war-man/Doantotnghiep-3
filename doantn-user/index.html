@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/slick-theme.css" rel="stylesheet" />
+    <link href="Content/slick.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="controller/app.js"></script>
+    <script src="controller/controller.js"></script>
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.slidepanel.setup.js"></script>
+    <script type="text/javascript" src="scripts/jquery.cycle.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.cycle.setup.js"></script>
+
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+<body>
+
+    <div class="wrapper col0">
+
+        <div id="topbar">
+            <div id="slidepanel">
+                <div class="topbox">
+                    <h2>Nullamlacus dui ipsum</h2>
+                    <p>Nullamlacus dui ipsum conseque loborttis non euisque morbi penas dapibulum orna. Urnaultrices quis curabitur phasellentesque congue magnis vestibulum quismodo nulla et feugiat. Adipisciniapellentum leo ut consequam ris felit elit id nibh sociis malesuada.</p>
+                    <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                </div>
+                <div class="topbox">
+                    <h2>Teachers Login Here</h2>
+                    <form action="#" method="post">
+                        <fieldset>
+                            <legend>Teachers Login Form</legend>
+                            <label for="teachername">
+                                Username:
+                                <input type="text" name="teachername" id="teachername" value="" />
+                            </label>
+                            <label for="teacherpass">
+                                Password:
+                                <input type="password" name="teacherpass" id="teacherpass" value="" />
+                            </label>
+                            <label for="teacherremember">
+                                <input class="checkbox" type="checkbox" name="teacherremember" id="teacherremember" checked="checked" />
+                                Remember me
+                            </label>
+                            <p>
+                                <input type="submit" name="teacherlogin" id="teacherlogin" value="Login" />
+                                &nbsp;
+                                <input type="reset" name="teacherreset" id="teacherreset" value="Reset" />
+                            </p>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="topbox last">
+                    <h2>Pupils Login Here</h2>
+                    <form action="#" method="post">
+                        <fieldset>
+                            <legend>Pupils Login Form</legend>
+                            <label for="pupilname">
+                                Username:
+                                <input type="text" name="pupilname" id="pupilname" value="" />
+                            </label>
+                            <label for="pupilpass">
+                                Password:
+                                <input type="password" name="pupilpass" id="pupilpass" value="" />
+                            </label>
+                            <label for="pupilremember">
+                                <input class="checkbox" type="checkbox" name="pupilremember" id="pupilremember" checked="checked" />
+                                Remember me
+                            </label>
+                            <p>
+                                <input type="submit" name="pupillogin" id="pupillogin" value="Login" />
+                                &nbsp;
+                                <input type="reset" name="pupilreset" id="pupilreset" value="Reset" />
+                            </p>
+                        </fieldset>
+                    </form>
+                </div>
+                <br class="clear" />
+            </div>
+            <div id="loginpanel">
+                <ul>
+                    <li class="left">Log In Here &raquo;</li>
+                    <li class="right" id="toggle"><a id="slideit" href="#slidepanel">Administration</a><a id="closeit" style="display: none;" href="#slidepanel">Close Panel</a></li>
+                </ul>
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
+
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col1">
+        <div id="header">
+            <div id="logo">
+                <h1><a href="#">HCM-EDU</a></h1>
+                <p>Sở giáo dục và đào tạo</p>
+            </div>
+            <div id="topnav">
+                <ul>
+                    <li class="active"><a href="index.html">Trang chủ</a></li>
+                    <li><a href="#">Tuyển sinh</a></li>
+                    <li><a href="#">Giáo viên</a></li>
+                    <li><a href="#">Học sinh</a></li>
+                    <li><a href="#">Sự kiện</a></li>
+                    <li class="last"><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
+    <div class="ads-wrapper" style="position: absolute; top: 480px;left: 300px;"> <div id="divAdRight-sticky-wrapper" class="sticky-wrapper" style="height: 796px;"><div id="divAdRight" style="padding: 0 0 170px;"><a style="clear: both;" target="blank" href="http://diemthi.hcm.edu.vn/"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/TS10 copy copy.JPG?w=125" style=" width:125px;"></a><a style="clear: both;" target="blank" href="http://dayhoctichhop.hcm.edu.vn/"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/emg.gif" style=" width:125px;"></a><a style="clear: both;" target="blank" href="http://ttthongtin.hcm.edu.vn/tin-tuc/he-thong-truong-lop-tuyen-sinh-trung-hoc-nam-hoc-2018-2019-c41153-59865.aspx"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/LogoLinhTInh/Logo2.jpg?w=125" style=" width:125px;"></a><a style="clear: both;" target="blank" href="http://www.moet.gov.vn/Pages/home.aspx"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/BoGDDT/CTTDT.JPG?w=125" style=" width:125px;"></a><a style="clear: both;" target="blank" href="http://www.giaoduc.edu.vn"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/LogoBaoGiaoducTP.png?w=125" style=" width:125px;"></a><a style="clear: both;" target="blank" href="https://tapchigiaoduc.moet.edu.vn/"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/BoGDDT/logo_site_So.jpg?w=125" style=" width:125px;"></a></div></div></div><div class="ads-wrapper" style="position: absolute; top: 0; left: 995px;"> <div id="divAdLeft-sticky-wrapper" class="sticky-wrapper" style="height: 770px;"><div id="divAdLeft" style="    top: 480px;
+    position: absolute;
+    float: right;
+    left: 450px;"><a style="clear: both;" target="blank" href="http://khuyenhochcm.com.vn/"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/HKH.png?w=125" style=" width:125px;"></a><a style="clear: both;" target="blank" href="http://freshmedia.com.vn/"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/LogoLinhTInh/ebanner FMS.gif" style=" width:125px;"></a><a style="clear: both;" target="blank" href="http://taphuan.hcm.edu.vn/"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/U1-copy.gif" style=" width:125px;"></a><a style="clear: both;" target="blank" href="https://1022.tphcm.gov.vn/"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/BoGDDT/logo1022.png?w=125" style=" width:125px;"></a><a style="clear: both;" target="blank" href="http://www.sotuphap.hochiminhcity.gov.vn/pages/tpl.aspx"><img src="http://f1.hcm.edu.vn//UploadImages/Advertising/hcmedu/111.JPG?w=125" style=" width:125px;"></a></div></div></div>
+
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col2">
+        <div id="featured_slide">
+            <div class="featured_box">
+                <a href="#"><img src="images/demo/450x300.gif" alt="" /></a>
+                <div class="floater">
+                    <h2>1. Aliquatjusto quisque nam</h2>
+                    <p>Orcimagna rhoncus et a nec antesque sed temportor pellus nibh conseque. Accumstsemper wisi pretium feugiat non ut eleifendrerisque at et condisse sce. Iaculumorci congue nam mollis odio id cras orci vestique euisquet at. Donecconsectetus lacilis ac pellus nam nibh curabitur sed anterdum nectetus adipis. Pretiummagnisse antes nunc pretium convallis tincidunt non at rutrumt.</p>
+                    <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                </div>
+            </div>
+            <div class="featured_box">
+                <a href="#"><img src="images/demo/450x300.gif" alt="" /></a>
+                <div class="floater">
+                    <h2>2. Aliquatjusto quisque nam</h2>
+                    <p>Duisvest lacus pellus purus temper maurisus et sodalesuada loreet sapiente et. Quissociis magnisl orci dui nulla ut antesque malesuada sed pede et. Idlacus ridiculisi nec cursus enim ac tur urnar nunc pellus pellenterdum. Necelisi aliquat curabiturpiscing semportortor sed et velit convallis quat adipiscing cursus. Rutrumeget id ipsum et sed maurisuspendimentum auctor siti.</p>
+                    <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                </div>
+            </div>
+            <div class="featured_box">
+                <a href="#"><img src="images/demo/450x300.gif" alt="" /></a>
+                <div class="floater">
+                    <h2>3. Dapiensociis temper donec</h2>
+                    <p>Pharetiumurna habitur et enim pellentesque phasellus aliquam nunc quis justo nam. Lobortororci dapibulum ac intesquet ut id sed intesque nec alique congue. Liberoaenec vest maurisus libero pede nisl ligula cursus vitae dis metus. Aeneanaccumsan orci nasce ac pulvinare enim tor quis antesque cumsan in. Justomontesque sem ac dolor iaculum dolor orci elit lacus et vestibulum.</p>
+                    <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                </div>
+            </div>
+            <div class="featured_box">
+                <a href="#"><img src="images/demo/450x300.gif" alt="" /></a>
+                <div class="floater">
+                    <h2>4. Dapiensociis temper donec</h2>
+                    <p>Pharetiumurna habitur et enim pellentesque phasellus aliquam nunc quis justo nam. Lobortororci dapibulum ac intesquet ut id sed intesque nec alique congue. Liberoaenec vest maurisus libero pede nisl ligula cursus vitae dis metus. Aeneanaccumsan orci nasce ac pulvinare enim tor quis antesque cumsan in. Justomontesque sem ac dolor iaculum dolor orci elit lacus et vestibulum.</p>
+                    <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                </div>
+            </div>
+            <div class="featured_box">
+                <a href="#"><img src="images/demo/450x300.gif" alt="" /></a>
+                <div class="floater">
+                    <h2>5. Nullain convallis ris elis</h2>
+                    <p>Nullamcorpervivamus nisl in sed adipit donec feugiat lor vel velit volutpat. Wisihabitur diculisi ac curabitur cursuspendreris sociis sed eger ipsum condisse laculis. Curabiturid non eu curabitae nibh por nullamcorper at nibh elis fring. Vestnibh congue praesenenatis justo et maecenasceleifend senterdum malesuada at dolor amet. Turisristibulum curabitae eros leo at interd.</p>
+                    <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col3">
+        <div id="homecontent">
+            <div class="fl_left">
+                <div class="column2">
+                    <ul>
+                        <li>
+                            <h2>Lipsum</h2>
+                            <div class="imgholder"><img src="images/demo/240x130.gif" alt="" /></div>
+                            <p>Nullamlacus dui ipsum conseqlo borttis non euisque morbipen a sdapibulum orna.</p>
+                            <p>Urnau ltrices quis curabitur pha sellent esque congue magnisve stib ulum quismodo nulla et feugiat. Adipisciniap ellentum leo ut consequam.</p>
+                            <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                        </li>
+                        <li class="last">
+                            <h2>Lipsum</h2>
+                            <div class="imgholder"><img src="images/demo/240x130.gif" alt="" /></div>
+                            <p>Nullamlacus dui ipsum conseqlo borttis non euisque morbipen a sdapibulum orna.</p>
+                            <p>Urnau ltrices quis curabitur pha sellent esque congue magnisve stib ulum quismodo nulla et feugiat. Adipisciniap ellentum leo ut consequam.</p>
+                            <p class="readmore"><a href="#">Continue Reading &raquo;</a></p>
+                        </li>
+                    </ul>
+                    <br class="clear" />
+                </div>
+                <div class="column2">
+                    <h2>About This Free CSS Template !</h2>
+                    <img class="imgl" src="images/demo/imgl.gif" alt="" />
+                    <p>This is a W3C standards compliant free website template from <a href="http://www.os-templates.com/">OS Templates</a>.</p>
+                    <p>This template is distributed using a <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>, which allows you to use and modify the template for both personal and commercial use when you keep the provided credit links in the footer. For more CSS templates visit <a href="http://www.os-templates.com/">Free Website Templates</a>.</p>
+                    <p>Morbitincidunt maurisque eros molest nunc anteget sed vel lacus mus semper. Anterdumnullam interdum eros dui urna consequam ac nisl nullam ligula vestassa.</p>
+                    <p>Condimentumfelis et amet tellent quisquet a leo lacus nec augue accumsan. Sagittislaorem dolor ipsum at urna et pharetium malesuada nis consectus odio.</p>
+                </div>
+            </div>
+            <div class="fl_right">
+                <h2>Latest From The School Blog</h2>
+                <ul>
+                    <li>
+                        <div class="imgholder"><a href="#"><img src="images/demo/80x80.gif" alt="" /></a></div>
+                        <p><strong><a href="#">Atnatis dolor tincidunt nulla</a></strong></p>
+                        <p>Feugiatrutrum rhoncus semper enim massa eu intesque ipsum velit orci dolorem. Atnatis dolor tincidunt nulla elit auctortis laculisi elit fauctortor natis loreet.</p>
+                    </li>
+                    <li>
+                        <div class="imgholder"><a href="#"><img src="images/demo/80x80.gif" alt="" /></a></div>
+                        <p><strong><a href="#">Atnatis dolor tincidunt nulla</a></strong></p>
+                        <p>Feugiatrutrum rhoncus semper enim massa eu intesque ipsum velit orci dolorem. Atnatis dolor tincidunt nulla elit auctortis laculisi elit fauctortor natis loreet.</p>
+                    </li>
+                    <li>
+                        <div class="imgholder"><a href="#"><img src="images/demo/80x80.gif" alt="" /></a></div>
+                        <p><strong><a href="#">Atnatis dolor tincidunt nulla</a></strong></p>
+                        <p>Feugiatrutrum rhoncus semper enim massa eu intesque ipsum velit orci dolorem. Atnatis dolor tincidunt nulla elit auctortis laculisi elit fauctortor natis loreet.</p>
+                    </li>
+                    <li>
+                        <div class="imgholder"><a href="#"><img src="images/demo/80x80.gif" alt="" /></a></div>
+                        <p><strong><a href="#">Atnatis dolor tincidunt nulla</a></strong></p>
+                        <p>Feugiatrutrum rhoncus semper enim massa eu intesque ipsum velit orci dolorem. Atnatis dolor tincidunt nulla elit auctortis laculisi elit fauctortor natis loreet.</p>
+                    </li>
+                    <li class="last">
+                        <div class="imgholder"><a href="#"><img src="images/demo/80x80.gif" alt="" /></a></div>
+                        <p><strong><a href="#">Atnatis dolor tincidunt nulla</a></strong></p>
+                        <p>Feugiatrutrum rhoncus semper enim massa eu intesque ipsum velit orci dolorem. Atnatis dolor tincidunt nulla elit auctortis laculisi elit fauctortor natis loreet.</p>
+                    </li>
+                </ul>
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col4">
+        <div id="footer">
+            <div class="footbox">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <div class="footbox">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <div class="footbox">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <div class="footbox">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <div class="footbox last">
+                <h2>Lacus interdum</h2>
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li><a href="#">Praesent et eros</a></li>
+                    <li><a href="#">Lorem ipsum dolor</a></li>
+                    <li><a href="#">Suspendisse in neque</a></li>
+                    <li class="last"><a href="#">Praesent et eros</a></li>
+                </ul>
+            </div>
+            <br class="clear" />
+        </div>
+    </div>
+    <div class="wrapper col4">
+        <div id="footer">
+            <div id="video-school">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/AfWZr2ZkG5o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/AfWZr2ZkG5o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/AfWZr2ZkG5o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/AfWZr2ZkG5o" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <!-- ####################################################################################################### -->
+    <div class="wrapper col5">
+        <div id="copyright">
+            <p class="fl_left">Copyright &copy; 2011 - All Rights Reserved - <a href="#">Domain Name</a></p>
+            <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
+            <br class="clear" />
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        $('#video-school').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    });
+</script>

@@ -171,6 +171,7 @@ namespace DOAN_CHuyenNGanh.Controllers
                         teacherChangeInfomation.number_social_insurance = teacherViewModel.number_social_insurance;
                         teacherChangeInfomation.gifted = teacherViewModel.gifted;
                         teacherChangeInfomation.status_deleted = false;
+                        teacherChangeInfomation.Subject = _dbContext.Subjects.SingleOrDefault(a=>a.Id== teacherViewModel.subject);
                         //Get Id teacher
 
                         _dbContext.SaveChanges();

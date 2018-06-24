@@ -8,9 +8,6 @@ namespace DOAN_CHuyenNGanh.Models
 {
     public class DynamicRoleAuthorizeAttribute : AuthorizeAttribute
     {
-        
-
-
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             var rolesProvider = new RoleProvider();

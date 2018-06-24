@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DOAN_CHuyenNGanh.Models.HomeRoomTeacher>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Class.name_Class)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teacher.name_Teacher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Year.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Class.name_Class)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teacher.name_Teacher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Class.Id,year=item.Year.Id,teacher=item.Teacher.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Class.Id, year = item.Year.Id, teacher = item.Teacher.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Class.Id, year = item.Year.Id, teacher = item.Teacher.Id })
+        </td>
+    </tr>
+}
+
+</table>

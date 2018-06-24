@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOAN_CHuyenNGanh", "DOAN_CHuyenNGanh\DOAN_CHuyenNGanh.csproj", "{FC682464-D799-4EDC-A670-E5CE92378B73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doantn-user", "doantn-user\doantn-user.csproj", "{D15874BB-3391-4AFB-B549-CAC23F2AF87F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +17,15 @@ Global
 		{FC682464-D799-4EDC-A670-E5CE92378B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC682464-D799-4EDC-A670-E5CE92378B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC682464-D799-4EDC-A670-E5CE92378B73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D15874BB-3391-4AFB-B549-CAC23F2AF87F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D15874BB-3391-4AFB-B549-CAC23F2AF87F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D15874BB-3391-4AFB-B549-CAC23F2AF87F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D15874BB-3391-4AFB-B549-CAC23F2AF87F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F59A16D2-F312-4D65-B606-8B8D575B6D1C}
 	EndGlobalSection
 EndGlobal

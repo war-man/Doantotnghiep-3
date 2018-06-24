@@ -7,9 +7,11 @@ namespace DOAN_CHuyenNGanh.Models.DTOs
 {
     public class ScheduleDTO
     {
-       public string idTeacher { get; set; }
+         public string idTeacher { get; set; }
         public string Semester { get; set; }
         public string Year { get; set; }
         public int dayweeks { get; set; }
+        public int datasession { get; set; }
+        public string classid { get; set; }
     }
 }

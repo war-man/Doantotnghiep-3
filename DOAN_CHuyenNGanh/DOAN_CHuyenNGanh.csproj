@@ -27,7 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <Use64BitIISExpress />
-    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -228,15 +228,19 @@
     <Compile Include="Controllers\CreateStudentController.cs" />
     <Compile Include="Controllers\GetColumnController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeRoomTeachersController.cs" />
     <Compile Include="Controllers\IPNController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManageTeacherController.cs" />
     <Compile Include="Controllers\RoleActionController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\SemestersController.cs" />
     <Compile Include="Controllers\SetColumnTeacherController.cs" />
+    <Compile Include="Controllers\SubjectsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
+    <Compile Include="Controllers\YearsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -256,12 +260,33 @@
     <Compile Include="Migrations\201806031140136_ScheduleTeacher2.Designer.cs">
       <DependentUpon>201806031140136_ScheduleTeacher2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806131353255_ScheduleTeacher21.cs" />
+    <Compile Include="Migrations\201806131353255_ScheduleTeacher21.Designer.cs">
+      <DependentUpon>201806131353255_ScheduleTeacher21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806131355336_ScheduleTeacher3.cs" />
+    <Compile Include="Migrations\201806131355336_ScheduleTeacher3.Designer.cs">
+      <DependentUpon>201806131355336_ScheduleTeacher3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806131401550_ScheduleTeacher4.cs" />
+    <Compile Include="Migrations\201806131401550_ScheduleTeacher4.Designer.cs">
+      <DependentUpon>201806131401550_ScheduleTeacher4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806230316182_post.cs" />
+    <Compile Include="Migrations\201806230316182_post.Designer.cs">
+      <DependentUpon>201806230316182_post.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806230533069_homeroomteacheredit.cs" />
+    <Compile Include="Migrations\201806230533069_homeroomteacheredit.Designer.cs">
+      <DependentUpon>201806230533069_homeroomteacheredit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Action.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CheckPhoneNumber.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\ClassListViewModel.cs" />
@@ -280,6 +305,7 @@
     <Compile Include="Models\DTOs\SetActionDTO.cs" />
     <Compile Include="Models\DynamicRoleAuthorizeAttribute.cs" />
     <Compile Include="Models\FocusExams.cs" />
+    <Compile Include="Models\Post.cs" />
     <Compile Include="Models\ScheduleTeacher.cs" />
     <Compile Include="Models\Valid\FutureDate.cs" />
     <Compile Include="Models\HomeRoomTeacher.cs" />
@@ -1181,6 +1207,26 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\ManageTeacher\Index.cshtml" />
     <Content Include="Views\ManageTeacher\Schedule.cshtml" />
+    <Content Include="Views\Subjects\Create.cshtml" />
+    <Content Include="Views\Subjects\Delete.cshtml" />
+    <Content Include="Views\Subjects\Details.cshtml" />
+    <Content Include="Views\Subjects\Edit.cshtml" />
+    <Content Include="Views\Subjects\Index.cshtml" />
+    <Content Include="Views\Semesters\Create.cshtml" />
+    <Content Include="Views\Semesters\Delete.cshtml" />
+    <Content Include="Views\Semesters\Details.cshtml" />
+    <Content Include="Views\Semesters\Edit.cshtml" />
+    <Content Include="Views\Semesters\Index.cshtml" />
+    <Content Include="Views\Years\Create.cshtml" />
+    <Content Include="Views\Years\Delete.cshtml" />
+    <Content Include="Views\Years\Details.cshtml" />
+    <Content Include="Views\Years\Edit.cshtml" />
+    <Content Include="Views\Years\Index.cshtml" />
+    <Content Include="Views\HomeRoomTeachers\Create.cshtml" />
+    <Content Include="Views\HomeRoomTeachers\Delete.cshtml" />
+    <Content Include="Views\HomeRoomTeachers\Details.cshtml" />
+    <Content Include="Views\HomeRoomTeachers\Edit.cshtml" />
+    <Content Include="Views\HomeRoomTeachers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ApiApp\" />
@@ -1207,6 +1253,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806031140136_ScheduleTeacher2.resx">
       <DependentUpon>201806031140136_ScheduleTeacher2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131353255_ScheduleTeacher21.resx">
+      <DependentUpon>201806131353255_ScheduleTeacher21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131355336_ScheduleTeacher3.resx">
+      <DependentUpon>201806131355336_ScheduleTeacher3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806131401550_ScheduleTeacher4.resx">
+      <DependentUpon>201806131401550_ScheduleTeacher4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806230316182_post.resx">
+      <DependentUpon>201806230316182_post.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806230533069_homeroomteacheredit.resx">
+      <DependentUpon>201806230533069_homeroomteacheredit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

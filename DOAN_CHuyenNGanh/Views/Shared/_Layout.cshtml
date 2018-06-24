@@ -40,12 +40,17 @@
 
             <ul class="navbar-primary-menu">
                 <li>
-                    <a href="#" id="title-roll"><img width="40" height="40" src="~/Content/Image/admin.png" /><span class="nav-label">Ban giám hiệu</span></a>
+                    <a href="#" class="show-action-menu-6" id="title-roll"><img width="40" height="40" src="~/Content/Image/admin.png" /><span class="nav-label">Ban giám hiệu</span></a>
+                    <ul id="action-menu-hide" class="action-menu-6">
+                        <li><a id="test" href="/Subjects/Index"><span class="nav-label">Quản lý môn học</span></a> </li>
+                        <li><a id="test" href="/Semesters/Index"><span class="nav-label">Quản lý năm học</span></a> </li>
+                        <li><a id="test" href="/Years/Index"><span class="nav-label">Quản lý học kỳ</span></a> </li>
+                    </ul>
                     <a href="#" id="title-roll" class="show-action-menu-2"><img width="40" height="40" src="~/Content/Image/teacher.png" /><span class="nav-label">Quản lí thông tin giáo viên</span></a>
                     <ul id="action-menu-hide" class="action-menu-2">
                         <li><a id="test" href="/ManageTeacher/Index"><span class="nav-label">Thông tin</span></a> </li>
                         <li><a id="test" href="/ManageTeacher/Schedule"><span class="nav-label">Lịch giảng dạy </span></a> </li>
-                        <li><a id="test" href="#"><span class="nav-label"> Chủ Nhiệm</span></a> </li>
+                        <li><a id="test" href="/HomeRoomTeachers/Index"><span class="nav-label"> Chủ Nhiệm</span></a> </li>
                     </ul>
                     <a href="#" id="title-roll" class="show-action-menu-1"><img width="40" height="40" src="~/Content/Image/student.png" /><span class="nav-label">Quản lí học sinh</span></a>
                     <ul id="action-menu-hide" class="action-menu-1">
@@ -126,6 +131,10 @@
             hidden();
             $('.action-menu-5').is(':visible') ? $('.action-menu-5').hide(200) : $('.action-menu-5').show(200);
         });
+        $('.show-action-menu-6').click(function (e) {
+            hidden();
+            $('.action-menu-6').is(':visible') ? $('.action-menu-6').hide(200) : $('.action-menu-6').show(200);
+        });
     });
     function hidden() {
         $('.action-menu-5').hide(200);
@@ -133,6 +142,8 @@
         $('.action-menu-3').hide(200);
         $('.action-menu-2').hide(200)
         $('.action-menu-1').hide(200);
+
+        $('.action-menu-6').hide(200);
         $('.action-menu').hide(200);
     }
     function getAction() {

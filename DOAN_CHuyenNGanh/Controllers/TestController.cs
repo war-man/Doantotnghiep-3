@@ -7,9 +7,6 @@ using System.Data.Entity;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Host.SystemWeb;
 using Microsoft.Owin.Security;
 
 namespace IdentitySample.Controllers
@@ -67,7 +64,6 @@ namespace IdentitySample.Controllers
             {
                
                 var user = await _dbContext.Users.Include(a=>a.Roles).FirstOrDefaultAsync(e => e.UserName == model.Email);
-                var name = User.Identity.IsAuthenticated;
                
                 if (User.IsInRole("Teacher"))
                 {

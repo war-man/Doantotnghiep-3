@@ -22,6 +22,9 @@ namespace IdentitySample.Models
         public DbSet<HomeRoomTeacher> HomeRoomTeachers { get; set; }
         public DbSet<ClassStudent> ClassStudent { get; set; }
         public DbSet<ScheduleTeacher> ScheduleTeacher { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Category> Categorys { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -59,7 +62,6 @@ namespace IdentitySample.Models
             modelBuilder.Entity<ClassStudent>().HasRequired(a => a.Class).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<ClassStudent>().HasRequired(a => a.Year).WithMany().WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<HomeRoomTeacher>().HasRequired(a => a.Teacher).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<HomeRoomTeacher>().HasRequired(a => a.Class).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<HomeRoomTeacher>().HasRequired(a => a.Year).WithMany().WillCascadeOnDelete(false);
 

@@ -64,72 +64,108 @@
             <td rowspan="12"><h1 id="dayweeks" style="text-align:center">2</h1></td>
             <td rowspan="5">Sáng</td>
             <td>1</td>
-            <td  class="Class-Lesson-1"><select class="form-control Class"></select></td>
+            <td  class="Class-Lesson-1"><select id="ClassLesson1" datasession="1" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>2</td>
-            <td class="Class-Lesson-2"><select  class="form-control Class"></select></td>
+            <td class="Class-Lesson-2"><select id="ClassLesson2" datasession="2" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>3</td>
-            <td  class="Class-Lesson-3"><select  class="form-control Class"></select></td>
+            <td  class="Class-Lesson-3"><select id="ClassLesson3" datasession="3" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>4</td>
-            <td  class="Class-Lesson-4"><select class="form-control Class"></select></td>
+            <td  class="Class-Lesson-4"><select id="ClassLesson4" datasession="4" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>5</td>
-            <td class="Class-Lesson-5"><select  class="form-control Class"></select></td>
+            <td class="Class-Lesson-5"><select id="ClassLesson5" datasession="5" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td rowspan="5">Chiều</td>
             <td>6</td>
-            <td  class="Class-Lesson-6"><select  class="form-control Class"></select></td>
+            <td  class="Class-Lesson-6"><select id="ClassLesson6" datasession="6" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>7</td>
-            <td  class="Class-Lesson-7"><select class="form-control Class"></select></td>
+            <td  class="Class-Lesson-7"><select id="ClassLesson7" datasession="7" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>8</td>
-            <td  class="Class-Lesson-8"><select class="form-control Class"></select></td>
+            <td  class="Class-Lesson-8"><select id="ClassLesson8" datasession="8" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>9</td>
-            <td  class="Class-Lesson-9"><select  class="form-control Class"></select></td>
+            <td  class="Class-Lesson-9"><select id="ClassLesson9" datasession="9" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>10</td>
-            <td  class="Class-Lesson-10"><select  class="form-control Class"></select></td>
+            <td  class="Class-Lesson-10"><select id="ClassLesson10" datasession="10" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td rowspan="5">Tối</td>
             <td>11</td>
-            <td class="Class-Lesson-11"><select  class="form-control Class"></select></td>
+            <td class="Class-Lesson-11"><select id="ClassLesson11" datasession="11" class="form-control Class"></select></td>
         </tr>
         <tr>
             <td>12</td>
-            <td class="Class-Lesson-12"><select   class="form-control Class"></select></td>
+            <td class="Class-Lesson-12"><select id="ClassLesson12" datasession="12"  class="form-control Class"></select></td>
         </tr>
     </table>
     <hr />
-    <button class="col-md-12 btn btn-primary">Lưu Lịch</button>
 </div>
 <script>
     $(document).ready(function () {
+        GetSchedule(2);
         $.get("/api/CommonApi/GetClass", function (data) {
             let html = '<option selected></option>';
             data.forEach(function (entry) {
                 html = html + '<option value="' + entry.Id + '">' + entry.name_Class+'</option>'
-                console.log(entry);
             });
             $('.Class').append(html);
         });
-
+        $('#Year').change(function () {
+            let datasession = $(this).attr("datasession");
+            let classid = $(this).val();
+            let idTeacher = $('#idTeacher').html();
+            let Semester = $("#Semester").val();
+            let Year = $("#Year").val();
+            let dayweeks = $('#dayweeks').html();
+            let data = {
+                idTeacher: idTeacher,
+                Semester: Semester,
+                Year: Year,
+                dayweeks: dayweeks,
+                datasession: datasession,
+                classid: classid,
+            }
+            $.post("/api/CommonApi/SaveClassSchedule", data, function (result) {
+                alert("Lưu lịch thành công");
+            });
+        });
+        $('.Class').change(function () {
+            let datasession = $(this).attr("datasession");
+            let classid = $(this).val();
+            let idTeacher = $('#idTeacher').html();
+            let Semester = $("#Semester").val();
+            let Year = $("#Year").val();
+            let dayweeks = $('#dayweeks').html();
+            let data = {
+                idTeacher: idTeacher,
+                Semester: Semester,
+                Year: Year,
+                dayweeks: dayweeks,
+                datasession: datasession,
+                classid: classid,
+            }
+            $.post("/api/CommonApi/SaveClassSchedule", data, function (result) {
+                alert("Lưu lịch thành công");
+            });
+        });
     });
-    
     function GetSchedule(stt) {
+        $('#dayweeks').html(stt);
         let idTeacher = $('#idTeacher').html();
         let Semester = $("#Semester").val();
         let Year =$("#Year").val();
@@ -140,9 +176,13 @@
             Year: Year,
             dayweeks: dayweeks
         }
-        console.log(data);
         $.post("/api/CommonApi/GetSchedule", data, function (result) {
-            console.log(result);
+            console.log(result)
+            for (let i = 0; i < result.length; i++) {
+                console.log(result[i])
+                $('#ClassLesson' + (i+1) + '').val(result[i].ClassId);
+                console.log($('#ClassLesson' + i + ''));
+            }
         });
     }
 </script>

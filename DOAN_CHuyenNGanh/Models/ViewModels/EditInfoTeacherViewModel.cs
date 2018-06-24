@@ -77,5 +77,7 @@ namespace DOAN_CHuyenNGanh.Models.ViewModels
         public string nameBank { get; set; }
 
         public string passWord { get; set; }
+
+        public string subject { get; set; }
     }
 }
