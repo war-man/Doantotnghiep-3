@@ -67,6 +67,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -220,7 +223,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CommonApiController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GetListStudentController.cs" />
     <Compile Include="Controllers\ClassListController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -231,7 +236,9 @@
     <Compile Include="Controllers\HomeRoomTeachersController.cs" />
     <Compile Include="Controllers\IPNController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ManageStudentController.cs" />
     <Compile Include="Controllers\ManageTeacherController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\RoleActionController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\SemestersController.cs" />
@@ -241,6 +248,8 @@
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Controllers\YearsController.cs" />
+    <Compile Include="Custom\CustomHandleError.cs" />
+    <Compile Include="Extentions\Extention.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,6 +289,18 @@
     <Compile Include="Migrations\201806230533069_homeroomteacheredit.Designer.cs">
       <DependentUpon>201806230533069_homeroomteacheredit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807091041471_UpdateStudent.cs" />
+    <Compile Include="Migrations\201807091041471_UpdateStudent.Designer.cs">
+      <DependentUpon>201807091041471_UpdateStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807100207118_UpdatePPost.cs" />
+    <Compile Include="Migrations\201807100207118_UpdatePPost.Designer.cs">
+      <DependentUpon>201807100207118_UpdatePPost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807100208446_UpdatePPost2.cs" />
+    <Compile Include="Migrations\201807100208446_UpdatePPost2.Designer.cs">
+      <DependentUpon>201807100208446_UpdatePPost2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Action.cs" />
@@ -294,9 +315,6 @@
     <Compile Include="Models\ClassTeacher.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
-    <Compile Include="Models\csPDTSample.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Models\DTOs\FocusExamsDTO.cs" />
     <Compile Include="Models\DTOs\InfoExamsDto.cs" />
     <Compile Include="Models\DTOs\ListTeacherDTO.cs" />
@@ -345,6 +363,7 @@
     <Content Include="Content\icon\edit-icon.png" />
     <Content Include="Content\icon\icon-boy.jpg" />
     <Content Include="Content\icon\icon-girl.png" />
+    <Content Include="Content\images\500.gif" />
     <Content Include="Content\Image\100-orange-Emoji.png" />
     <Content Include="Content\Image\avatar.jpg" />
     <Content Include="Content\Image\account.png" />
@@ -1113,6 +1132,7 @@
     <Content Include="Content\xa-phuong\973.json" />
     <Content Include="Content\file\peopel.json" />
     <Content Include="Content\file\nameBank.json" />
+    <None Include="Properties\PublishProfiles\doantotnghiephutech - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -1227,6 +1247,20 @@
     <Content Include="Views\HomeRoomTeachers\Details.cshtml" />
     <Content Include="Views\HomeRoomTeachers\Edit.cshtml" />
     <Content Include="Views\HomeRoomTeachers\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\ManageStudent\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ApiApp\" />
@@ -1268,6 +1302,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806230533069_homeroomteacheredit.resx">
       <DependentUpon>201806230533069_homeroomteacheredit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807091041471_UpdateStudent.resx">
+      <DependentUpon>201807091041471_UpdateStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807100207118_UpdatePPost.resx">
+      <DependentUpon>201807100207118_UpdatePPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807100208446_UpdatePPost2.resx">
+      <DependentUpon>201807100208446_UpdatePPost2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

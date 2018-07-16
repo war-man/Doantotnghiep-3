@@ -72,6 +72,7 @@
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <None Include="Properties\PublishProfiles\doantotnghiepuser - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

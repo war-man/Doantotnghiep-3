@@ -70,7 +70,16 @@ namespace IdentitySample.Controllers
                    var resultTeacher = await _dbContext.Teachers.FirstOrDefaultAsync(e => e.ApplicationUser.Id == user.Id);
                     return Ok(resultTeacher);
                 }
-
+                if (User.IsInRole("Student"))
+                {
+                    var resultStudent = await _dbContext.Students.FirstOrDefaultAsync(e => e.ApplicationUser.Id == user.Id);
+                    return Ok(resultStudent);
+                }
+                if (User.IsInRole("Parent"))
+                {
+                    var resultParents = await _dbContext.Parents.FirstOrDefaultAsync(e => e.ApplicationUser.Id == user.Id);
+                    return Ok(resultParents);
+                }
                 return Ok(user);
                 
 

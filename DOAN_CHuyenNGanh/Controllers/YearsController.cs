@@ -11,6 +11,7 @@ using IdentitySample.Models;
 
 namespace DOAN_CHuyenNGanh.Controllers
 {
+    [Authorize]
     public class YearsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

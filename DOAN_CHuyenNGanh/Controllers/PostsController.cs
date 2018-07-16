@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -12,108 +13,115 @@ using IdentitySample.Models;
 namespace DOAN_CHuyenNGanh.Controllers
 {
     [Authorize]
-    public class SemestersController : Controller
+    public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Semesters
-        public ActionResult Index()
+        // GET: Posts
+        public async Task<ActionResult> Index()
         {
-            return View(db.Semesters.ToList());
+           
+            return View(await db.Posts.ToListAsync());
         }
 
-        // GET: Semesters/Details/5
-        public ActionResult Details(string id)
+        // GET: Posts/Details/5
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semester semester = db.Semesters.Find(id);
-            if (semester == null)
+            Post post = await db.Posts.FindAsync(id);
+            if (post == null)
             {
                 return HttpNotFound();
             }
-            return View(semester);
+            return View(post);
         }
 
-        // GET: Semesters/Create
+        // GET: Posts/Create
         public ActionResult Create()
         {
+            ViewBag.Category_Id = new SelectList(db.Categorys, "Id", "Name");
             return View();
         }
 
-        // POST: Semesters/Create
+        // POST: Posts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Semester semester)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,LinkImage,DeleteFlag,Category_Id,DateTime")] Post post)
         {
             if (ModelState.IsValid)
             {
-                db.Semesters.Add(semester);
-                db.SaveChanges();
+
+                var categoryId = int.Parse(post.Category_Id);
+                var category = db.Categorys.SingleOrDefault(a => a.Id == categoryId);
+                post.Category = category;
+                db.Posts.Add(post);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(semester);
+            return View(post);
         }
 
-        // GET: Semesters/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Posts/Edit/5
+        public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semester semester = db.Semesters.Find(id);
-            if (semester == null)
+            ViewBag.Category_Id = new SelectList(db.Categorys, "Id", "Name");
+            Post post = await db.Posts.FindAsync(id);
+            if (post == null)
             {
                 return HttpNotFound();
             }
-            return View(semester);
+            return View(post);
         }
 
-        // POST: Semesters/Edit/5
+        // POST: Posts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Semester semester)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name,Description,LinkImage,DeleteFlag,Category_Id,DateTime")] Post post)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(semester).State = EntityState.Modified;
-                db.SaveChanges();
+                db.Entry(post).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(semester);
+            return View(post);
         }
 
-        // GET: Semesters/Delete/5
-        public ActionResult Delete(string id)
+        // GET: Posts/Delete/5
+        public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semester semester = db.Semesters.Find(id);
-            if (semester == null)
+            Post post = await db.Posts.FindAsync(id);
+            if (post == null)
             {
                 return HttpNotFound();
             }
-            return View(semester);
+            return View(post);
         }
 
-        // POST: Semesters/Delete/5
+        // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Semester semester = db.Semesters.Find(id);
-            db.Semesters.Remove(semester);
-            db.SaveChanges();
+            Post post = await db.Posts.FindAsync(id);
+            db.Posts.Remove(post);
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

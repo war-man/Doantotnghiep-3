@@ -12,107 +12,107 @@ using IdentitySample.Models;
 namespace DOAN_CHuyenNGanh.Controllers
 {
     [Authorize]
-    public class SemestersController : Controller
+    public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Semesters
+        // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Semesters.ToList());
+            return View(db.Categorys.ToList());
         }
 
-        // GET: Semesters/Details/5
-        public ActionResult Details(string id)
+        // GET: Categories/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semester semester = db.Semesters.Find(id);
-            if (semester == null)
+            Category category = db.Categorys.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(semester);
+            return View(category);
         }
 
-        // GET: Semesters/Create
+        // GET: Categories/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Semesters/Create
+        // POST: Categories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Semester semester)
+        public ActionResult Create([Bind(Include = "Id,Name,DeleteFlag")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Semesters.Add(semester);
+                db.Categorys.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(semester);
+            return View(category);
         }
 
-        // GET: Semesters/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Categories/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semester semester = db.Semesters.Find(id);
-            if (semester == null)
+            Category category = db.Categorys.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(semester);
+            return View(category);
         }
 
-        // POST: Semesters/Edit/5
+        // POST: Categories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Semester semester)
+        public ActionResult Edit([Bind(Include = "Id,Name,DeleteFlag")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(semester).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(semester);
+            return View(category);
         }
 
-        // GET: Semesters/Delete/5
-        public ActionResult Delete(string id)
+        // GET: Categories/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Semester semester = db.Semesters.Find(id);
-            if (semester == null)
+            Category category = db.Categorys.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(semester);
+            return View(category);
         }
 
-        // POST: Semesters/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Semester semester = db.Semesters.Find(id);
-            db.Semesters.Remove(semester);
+            Category category = db.Categorys.Find(id);
+            db.Categorys.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

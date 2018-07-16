@@ -52,7 +52,7 @@ namespace IdentitySample.Models
             modelBuilder.Entity<Contact>().HasRequired(a => a.Year).WithMany().WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<Teacher>().HasRequired(a=>a.Class).WithMany().WillCascadeOnDelete(false);
-            
+            modelBuilder.Entity<Post>().HasRequired(a => a.Category).WithMany().WillCascadeOnDelete(false);
 
             //modelBuilder.Entity<ClassTeacher>().HasRequired(a => a.Class).WithMany().WillCascadeOnDelete(false);
             modelBuilder.Entity<ClassTeacher>().HasRequired(a => a.Teacher).WithMany().WillCascadeOnDelete(false);

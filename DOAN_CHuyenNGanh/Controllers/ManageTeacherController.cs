@@ -15,6 +15,7 @@ using System.Web.Mvc;
 
 namespace DOAN_CHuyenNGanh.Controllers
 {
+    [Authorize]
     public class ManageTeacherController : Controller
     {
         private ApplicationDbContext _dbContext = null;

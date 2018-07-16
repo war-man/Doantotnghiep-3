@@ -19,5 +19,8 @@ namespace DOAN_CHuyenNGanh.Models
 
         public Category Category { get; set; }
 
+        public string Category_Id { get; set; }
+
+        public DateTime DateTime { get; set; }
     }
 }

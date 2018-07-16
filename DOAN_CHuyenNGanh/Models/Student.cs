@@ -13,9 +13,6 @@ namespace DOAN_CHuyenNGanh.Models
         [Key]
         [Column(Order = 1)]
         public string Id { get; set; }
-        //public Class Class { get; set; }
-        //[Required]
-        //public string ClassId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
         [Key]
@@ -33,5 +30,22 @@ namespace DOAN_CHuyenNGanh.Models
         [Required]
         public string phonenumber { get; set; }
 
+        [Required]
+        public int birth_place { get; set; }
+
+        [Required]
+        public string ngayvaodoan { get; set; }
+
+        [Required]
+        public string ngayvaodoi { get; set; }
+
+        [Required]
+        public string name_birth_place { get; set; }
+
+        [Required]
+        public string quequan { get; set; }
+
+        [Required]
+        public string description { get; set; }
     }
 }

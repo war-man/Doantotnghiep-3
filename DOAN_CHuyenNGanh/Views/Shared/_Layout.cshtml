@@ -65,19 +65,23 @@
                         <li><a id="test" href="#"><span class="nav-label">Gửi thông tin</span></a> </li>
                         <li><a id="test" href="#"><span class="nav-label">Liên lạc góp ý </span></a> </li>
                     </ul>
-                    <a href="#" id="title-roll" class="show-action-menu-4"><img width="40" height="40" src="~/Content/Image/account.png" /><span class="nav-label">Quản lí thông tin phụ huynh</span></a>
+                    <a href="#" id="title-roll" class="show-action-menu-4"><img width="40" height="40" src="~/Content/Image/account.png" /><span class="nav-label">Quản lí thông tin tài khoản</span></a>
                     <ul id="action-menu-hide" class="action-menu-4">
-                        <li><a id="test" href="#"><span class="nav-label">Học sinh</span></a> </li>
-                        <li><a id="test" href="#"><span class="nav-label">Giáo viên</span></a> </li>
-                        <li><a id="test" href="#"><span class="nav-label">Phụ huynh</span></a> </li>
+                        <li><a id="test" href="/UsersAdmin/Index"><span class="nav-label">Thông tin</span></a> </li>
+                        <li><a id="test" href="/RolesAdmin/Index"><span class="nav-label">Thông tin quyền</span></a> </li>
+                        <li><a id="test" href="/RoleAction/Index"><span class="nav-label">Cấp quyền sử dụng</span></a> </li>
                     </ul>
-                    <a href="#" id="title-roll" class="show-action-menu-5"><img width="40" height="40" src="~/Content/Image/info_3-512.png" /><span class="nav-label">Quản lí thông tin phụ huynh</span></a>
+                    <a href="#" id="title-roll" class="show-action-menu-5"><img width="40" height="40" src="~/Content/Image/info_3-512.png" /><span class="nav-label">Quản lí thông tin chung</span></a>
                     <ul id="action-menu-hide" class="action-menu-5">
                         <li><a id="test" href="#"><span class="nav-label">Học phí</span></a> </li>
                         <li><a id="test" href="#"><span class="nav-label">Thông báo</span></a> </li>
                     </ul>
                     <a href="#" id="title-roll" class="show-action-menu"><img width="40" height="40" src="~/Content/Image/setting-icon.png" /><span class="nav-label">Cài đặt chung</span></a>
-                    <ul id="action-menu-hide" class="action-menu"></ul>
+                    
+                    <ul id="action-menu-hide" class="action-menu">
+                        <li><a id="test" href="/Posts/Index"><span class="nav-label">Quản lý bài đăng</span></a> </li>
+                        <li><a id="test" href="/Categories/Index"><span class="nav-label">Loại Bài Đăng</span></a> </li>
+                    </ul>
                 </li>
 
             </ul>
@@ -97,7 +101,6 @@
 </html>
 <script>
     $(document).ready(function () {
-        getAction();
         hidden();
         $('.btn-expand-collapse').click(function (e) {
             $('.navbar-primary').toggleClass('collapsed');
