@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 
 namespace IdentitySample.Controllers
 {
+    [Authorize]
     public class TestController : ApiController
     {
         private const string LocalLoginProvider = "Local";
