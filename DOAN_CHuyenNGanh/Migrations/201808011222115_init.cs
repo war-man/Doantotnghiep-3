@@ -3,7 +3,7 @@ namespace DOAN_CHuyenNGanh.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -14,6 +14,16 @@ namespace DOAN_CHuyenNGanh.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
                         Url = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Categories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        DeleteFlag = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -53,6 +63,13 @@ namespace DOAN_CHuyenNGanh.Migrations
                         sex = c.Boolean(nullable: false),
                         address = c.String(nullable: false),
                         phonenumber = c.String(nullable: false),
+                        birth_place = c.Int(nullable: false),
+                        ngayvaodoan = c.String(nullable: false),
+                        ngayvaodoi = c.String(nullable: false),
+                        name_birth_place = c.String(nullable: false),
+                        quequan = c.String(nullable: false),
+                        description = c.String(nullable: false),
+                        urlImage = c.String(nullable: false),
                         ApplicationUser_Id = c.String(maxLength: 128),
                         Parent_Id = c.String(maxLength: 128),
                     })
@@ -180,6 +197,7 @@ namespace DOAN_CHuyenNGanh.Migrations
                         first_name = c.String(maxLength: 50),
                         birth_day = c.String(nullable: false),
                         birth_place = c.Int(nullable: false),
+                        name_birth_place = c.String(nullable: false),
                         people = c.String(nullable: false, maxLength: 10),
                         phone_number = c.String(nullable: false),
                         email = c.String(nullable: false),
@@ -197,6 +215,7 @@ namespace DOAN_CHuyenNGanh.Migrations
                         nameBank = c.String(nullable: false),
                         status_deleted = c.Boolean(nullable: false),
                         SubjectId = c.String(maxLength: 128),
+                        urlImage = c.String(),
                         ApplicationUser_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -279,17 +298,34 @@ namespace DOAN_CHuyenNGanh.Migrations
                 "dbo.HomeRoomTeachers",
                 c => new
                     {
-                        TeacherId = c.String(nullable: false, maxLength: 128),
                         ClassId = c.String(nullable: false, maxLength: 128),
                         YearId = c.String(nullable: false, maxLength: 128),
+                        TeacherId = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => new { t.TeacherId, t.ClassId, t.YearId })
+                .PrimaryKey(t => new { t.ClassId, t.YearId })
                 .ForeignKey("dbo.Classes", t => t.ClassId)
                 .ForeignKey("dbo.Teachers", t => t.TeacherId)
                 .ForeignKey("dbo.Years", t => t.YearId)
-                .Index(t => t.TeacherId)
                 .Index(t => t.ClassId)
-                .Index(t => t.YearId);
+                .Index(t => t.YearId)
+                .Index(t => t.TeacherId);
+            
+            CreateTable(
+                "dbo.Posts",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                        LinkImage = c.String(),
+                        DeleteFlag = c.Boolean(nullable: false),
+                        Category_Id = c.String(),
+                        DateTime = c.DateTime(nullable: false),
+                        Category_Id1 = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.Category_Id1)
+                .Index(t => t.Category_Id1);
             
             CreateTable(
                 "dbo.RoleActions",
@@ -315,6 +351,28 @@ namespace DOAN_CHuyenNGanh.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
+                "dbo.ScheduleTeachers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Lesson = c.Int(nullable: false),
+                        weekdays = c.Int(nullable: false),
+                        SemesterId = c.String(maxLength: 128),
+                        YearId = c.String(maxLength: 128),
+                        TeacherId = c.String(maxLength: 128),
+                        ClassId = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Classes", t => t.ClassId)
+                .ForeignKey("dbo.Semesters", t => t.SemesterId)
+                .ForeignKey("dbo.Teachers", t => t.TeacherId)
+                .ForeignKey("dbo.Years", t => t.YearId)
+                .Index(t => t.SemesterId)
+                .Index(t => t.YearId)
+                .Index(t => t.TeacherId)
+                .Index(t => t.ClassId);
+            
+            CreateTable(
                 "dbo.SetColumnContacts",
                 c => new
                     {
@@ -336,9 +394,14 @@ namespace DOAN_CHuyenNGanh.Migrations
         {
             DropForeignKey("dbo.SetColumnContacts", "YearId", "dbo.Years");
             DropForeignKey("dbo.SetColumnContacts", "TeacherId", "dbo.Teachers");
+            DropForeignKey("dbo.ScheduleTeachers", "YearId", "dbo.Years");
+            DropForeignKey("dbo.ScheduleTeachers", "TeacherId", "dbo.Teachers");
+            DropForeignKey("dbo.ScheduleTeachers", "SemesterId", "dbo.Semesters");
+            DropForeignKey("dbo.ScheduleTeachers", "ClassId", "dbo.Classes");
             DropForeignKey("dbo.RoleActions", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.RoleActions", "ActionId", "dbo.Actions");
+            DropForeignKey("dbo.Posts", "Category_Id1", "dbo.Categories");
             DropForeignKey("dbo.HomeRoomTeachers", "YearId", "dbo.Years");
             DropForeignKey("dbo.HomeRoomTeachers", "TeacherId", "dbo.Teachers");
             DropForeignKey("dbo.HomeRoomTeachers", "ClassId", "dbo.Classes");
@@ -366,12 +429,17 @@ namespace DOAN_CHuyenNGanh.Migrations
             DropForeignKey("dbo.ClassStudents", "ClassId", "dbo.Classes");
             DropIndex("dbo.SetColumnContacts", new[] { "TeacherId" });
             DropIndex("dbo.SetColumnContacts", new[] { "YearId" });
+            DropIndex("dbo.ScheduleTeachers", new[] { "ClassId" });
+            DropIndex("dbo.ScheduleTeachers", new[] { "TeacherId" });
+            DropIndex("dbo.ScheduleTeachers", new[] { "YearId" });
+            DropIndex("dbo.ScheduleTeachers", new[] { "SemesterId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.RoleActions", new[] { "RoleId" });
             DropIndex("dbo.RoleActions", new[] { "ActionId" });
+            DropIndex("dbo.Posts", new[] { "Category_Id1" });
+            DropIndex("dbo.HomeRoomTeachers", new[] { "TeacherId" });
             DropIndex("dbo.HomeRoomTeachers", new[] { "YearId" });
             DropIndex("dbo.HomeRoomTeachers", new[] { "ClassId" });
-            DropIndex("dbo.HomeRoomTeachers", new[] { "TeacherId" });
             DropIndex("dbo.FocusExams", new[] { "SemesterId" });
             DropIndex("dbo.FocusExams", new[] { "YearId" });
             DropIndex("dbo.FocusExams", new[] { "SubjectId" });
@@ -397,8 +465,10 @@ namespace DOAN_CHuyenNGanh.Migrations
             DropIndex("dbo.ClassStudents", new[] { "ClassId" });
             DropIndex("dbo.ClassStudents", new[] { "StudentId" });
             DropTable("dbo.SetColumnContacts");
+            DropTable("dbo.ScheduleTeachers");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.RoleActions");
+            DropTable("dbo.Posts");
             DropTable("dbo.HomeRoomTeachers");
             DropTable("dbo.FocusExams");
             DropTable("dbo.Semesters");
@@ -415,6 +485,7 @@ namespace DOAN_CHuyenNGanh.Migrations
             DropTable("dbo.Students");
             DropTable("dbo.ClassStudents");
             DropTable("dbo.Classes");
+            DropTable("dbo.Categories");
             DropTable("dbo.Actions");
         }
     }

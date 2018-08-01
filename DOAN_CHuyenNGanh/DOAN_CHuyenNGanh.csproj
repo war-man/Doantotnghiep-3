@@ -335,57 +335,9 @@
     </Compile>
     <Compile Include="Helper\IFormFile.cs" />
     <Compile Include="Helper\StorageHelper.cs" />
-    <Compile Include="Migrations\201805010908005_Initial.cs" />
-    <Compile Include="Migrations\201805010908005_Initial.Designer.cs">
-      <DependentUpon>201805010908005_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805051055072_teacher.cs" />
-    <Compile Include="Migrations\201805051055072_teacher.Designer.cs">
-      <DependentUpon>201805051055072_teacher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806030915270_ScheduleTeacher.cs" />
-    <Compile Include="Migrations\201806030915270_ScheduleTeacher.Designer.cs">
-      <DependentUpon>201806030915270_ScheduleTeacher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806031140136_ScheduleTeacher2.cs" />
-    <Compile Include="Migrations\201806031140136_ScheduleTeacher2.Designer.cs">
-      <DependentUpon>201806031140136_ScheduleTeacher2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806131353255_ScheduleTeacher21.cs" />
-    <Compile Include="Migrations\201806131353255_ScheduleTeacher21.Designer.cs">
-      <DependentUpon>201806131353255_ScheduleTeacher21.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806131355336_ScheduleTeacher3.cs" />
-    <Compile Include="Migrations\201806131355336_ScheduleTeacher3.Designer.cs">
-      <DependentUpon>201806131355336_ScheduleTeacher3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806131401550_ScheduleTeacher4.cs" />
-    <Compile Include="Migrations\201806131401550_ScheduleTeacher4.Designer.cs">
-      <DependentUpon>201806131401550_ScheduleTeacher4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806230316182_post.cs" />
-    <Compile Include="Migrations\201806230316182_post.Designer.cs">
-      <DependentUpon>201806230316182_post.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806230533069_homeroomteacheredit.cs" />
-    <Compile Include="Migrations\201806230533069_homeroomteacheredit.Designer.cs">
-      <DependentUpon>201806230533069_homeroomteacheredit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807091041471_UpdateStudent.cs" />
-    <Compile Include="Migrations\201807091041471_UpdateStudent.Designer.cs">
-      <DependentUpon>201807091041471_UpdateStudent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807100207118_UpdatePPost.cs" />
-    <Compile Include="Migrations\201807100207118_UpdatePPost.Designer.cs">
-      <DependentUpon>201807100207118_UpdatePPost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807100208446_UpdatePPost2.cs" />
-    <Compile Include="Migrations\201807100208446_UpdatePPost2.Designer.cs">
-      <DependentUpon>201807100208446_UpdatePPost2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807311410588_updateImageTeacher.cs" />
-    <Compile Include="Migrations\201807311410588_updateImageTeacher.Designer.cs">
-      <DependentUpon>201807311410588_updateImageTeacher.cs</DependentUpon>
+    <Compile Include="Migrations\201808011222115_init.cs" />
+    <Compile Include="Migrations\201808011222115_init.Designer.cs">
+      <DependentUpon>201808011222115_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1366,44 +1318,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805010908005_Initial.resx">
-      <DependentUpon>201805010908005_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805051055072_teacher.resx">
-      <DependentUpon>201805051055072_teacher.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806030915270_ScheduleTeacher.resx">
-      <DependentUpon>201806030915270_ScheduleTeacher.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806031140136_ScheduleTeacher2.resx">
-      <DependentUpon>201806031140136_ScheduleTeacher2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806131353255_ScheduleTeacher21.resx">
-      <DependentUpon>201806131353255_ScheduleTeacher21.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806131355336_ScheduleTeacher3.resx">
-      <DependentUpon>201806131355336_ScheduleTeacher3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806131401550_ScheduleTeacher4.resx">
-      <DependentUpon>201806131401550_ScheduleTeacher4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806230316182_post.resx">
-      <DependentUpon>201806230316182_post.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806230533069_homeroomteacheredit.resx">
-      <DependentUpon>201806230533069_homeroomteacheredit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807091041471_UpdateStudent.resx">
-      <DependentUpon>201807091041471_UpdateStudent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807100207118_UpdatePPost.resx">
-      <DependentUpon>201807100207118_UpdatePPost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807100208446_UpdatePPost2.resx">
-      <DependentUpon>201807100208446_UpdatePPost2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807311410588_updateImageTeacher.resx">
-      <DependentUpon>201807311410588_updateImageTeacher.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808011222115_init.resx">
+      <DependentUpon>201808011222115_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
