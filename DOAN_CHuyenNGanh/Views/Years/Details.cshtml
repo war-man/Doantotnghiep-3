@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết</h2>
 
 <div>
-    <h4>Year</h4>
+    <h4>Năm học</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,12 +16,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Name, "Năm học")
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Trở về trang trước", "Index")
 </p>
