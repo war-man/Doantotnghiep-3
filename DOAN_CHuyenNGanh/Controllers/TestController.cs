@@ -14,7 +14,7 @@ namespace IdentitySample.Controllers
     [Authorize]
     public class TestController : ApiController
     {
-        private const string LocalLoginProvider = "Local";
+
         private ApplicationUserManager _userManager;
         private ApplicationSignInManager _signInManager;
 
@@ -82,8 +82,6 @@ namespace IdentitySample.Controllers
                     return Ok(resultParents);
                 }
                 return Ok(user);
-                
-
             }
             else { return BadRequest(); }
         }

@@ -25,7 +25,12 @@ namespace DOAN_CHuyenNGanh.Controllers.api
         {
             return db.Posts;
         }
-
+        [Route("api/Posts/Header")]
+        [AllowAnonymous]
+        public IQueryable<Post> GetPostsHeader()
+        {
+            return db.Posts.Where(a=>a.Name.Contains("Tiêu đề"));
+        }
         [AllowAnonymous]
         // GET: api/Posts/5
         [ResponseType(typeof(Post))]

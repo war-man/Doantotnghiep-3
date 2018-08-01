@@ -47,5 +47,8 @@ namespace DOAN_CHuyenNGanh.Models
 
         [Required]
         public string description { get; set; }
+
+        [Required]
+        public string urlImage { get; set; }
     }
 }

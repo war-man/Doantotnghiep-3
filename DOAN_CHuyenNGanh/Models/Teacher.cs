@@ -89,5 +89,7 @@ namespace DOAN_CHuyenNGanh.Models
         public Subject Subject { get; set; }
 
         public string SubjectId { get; set; }
+
+        public string urlImage { get; set; }
     }
 }

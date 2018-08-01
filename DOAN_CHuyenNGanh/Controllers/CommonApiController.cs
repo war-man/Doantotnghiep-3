@@ -1,5 +1,6 @@
 ﻿using DOAN_CHuyenNGanh.Models.DTOs;
 using IdentitySample.Models;
+using Nexmo.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,17 @@ namespace DOAN_CHuyenNGanh.Controllers
         public IHttpActionResult GetClass()
         {
             return Ok(_dbContext.Classes.ToList());
+        }
+        [Route("api/CommonApi/GetAllSchedule")]
+        [HttpPost]
+        public IHttpActionResult GetAllSchedule(ScheduleDTO scheduleDTO)
+        {
+            var scheduleTeachers = _dbContext.ScheduleTeacher.Where(a => a.TeacherId == scheduleDTO.idTeacher && a.SemesterId == scheduleDTO.Semester && a.YearId == scheduleDTO.Year).ToList();
+            if (scheduleTeachers.Count == 0)
+            {
+                return BadRequest();
+            }
+            return Ok(scheduleTeachers);
         }
         [Route("api/CommonApi/GetSchedule")]
         [HttpPost]
@@ -53,8 +65,25 @@ namespace DOAN_CHuyenNGanh.Controllers
                 return BadRequest();
             }
             scheduleTeachers.ClassId = scheduleDTO.classid;
-            _dbContext.SaveChanges();
+
             return Ok();
+        }
+        [Route("api/CommonApi/Announce")]
+        [HttpGet]
+        public IHttpActionResult AnnounceToParent()
+        {
+            var client = new Client(creds: new Nexmo.Api.Request.Credentials
+            {
+                ApiKey = "45483600",
+                ApiSecret = "zNy9sPaNEM7nb8y9"
+            });
+            var results = client.SMS.Send(request: new SMS.SMSRequest
+            {
+                from = "HCM-EDU",
+                to = "84919333309",
+                text = "Moi phu huynh em XXX hop phu huynh vao luc yyy tai dia diem truong xxx phong aaa. Thong bao ve ket qua hoc ki 1 nam hoc 2017 2018"
+            });
+            return Ok(results);
         }
     }
 }
