@@ -132,7 +132,7 @@ namespace DOAN_CHuyenNGanh.Controllers
             var take = model.length;
             var skip = model.start;
 
-            string sortBy = "";
+            string sortBy = "Id";
             bool sortDir = true;
 
             if (model.order != null)
@@ -176,21 +176,9 @@ namespace DOAN_CHuyenNGanh.Controllers
         }
         public List<Student> GetListNonSearch(Expression<Func<Student, bool>> whereClause, string sortBy, bool sortDir, out int filteredResultsCount, out int totalResultsCount, int take, int skip)
         {
-            var result = db.Students.Include("")
+            var result = db.Students
                              .AsExpandable()
                              .Where(whereClause)
-                             .Select(s => new Student
-                             {
-                                 lastname_Student = s.lastname_Student,
-                                 firstname_Student = s.firstname_Student,
-                                 sex = s.sex,
-                                 birthDay = s.birthDay,
-                                 phonenumber  = s.phonenumber,
-                                 Id = s.Id,
-                                 Parent = s.Parent,
-                                 address = s.address,
-                                 quequan=s.quequan
-                             })
                              .OrderBy(sortBy, sortDir)
                              .Skip(skip)
                              .Take(take)

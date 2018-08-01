@@ -1,15 +1,13 @@
-﻿<div style="margin:30px;">
+﻿<a href="/ManageStudent/Create" class="btn btn-primary">Thêm mới học sinh</a>
+<div style="margin:30px;">
     <table id="table" class="display" cellspacing="0">
         <thead>
             <tr style="text-align:left; ">
-                <th></th>
                 <th>Mã số học sinh</th>
                 <th>Họ và tên</th>
                 <th>Giới tính</th>
                 <th>Ngày sinh</th>
-                <th>SĐT</th>
-                <th>Email</th>
-                <th>Địa chỉ</th>
+                <th>Hình đại diện</th>
                 <th>Quê quán</th>
             </tr>
         </thead>
@@ -21,7 +19,7 @@
         "serverSide": true,
         "dom": 'flrtip',
         "ajax": {
-            url: "/ManageStudent/Index",
+            url: "/ManageStudent/CustomServerSideSearchAction",
             type: 'POST',
             //data: function (d) {
             //    d.minDate = $('#datepickerStart').val();
@@ -34,41 +32,29 @@
             "searchPlaceholder": "Search..."
         },
         "columns": [
-            {
-                data: "IsUserCreated", name: 'IsUserCreated', "Width": "5%",
-                render: function (data) {
-                    return data ? '<label class="container"><input class="CheckDelete" type= "checkbox"><span class="checkmark"></span></label>' : '';
-                }
-            },
-            { data: 'Id', name: "", "Width": "5%" },
-            {
-                data: null, name: 'FirstName', "autoWidth": true, "orderable": false,
-                render: function (data) {
-                    return data.IsUserCreated ? '<a class="ShowDataByName" href="#" >' + data.FirstName + '</a>' : '' + data.FirstName + '';
-                }
-            },
+            { data: 'Id', name: "Id", "Width": "5%" },
             {
                 data: null, name: 'FullName', "autoWidth": true, "orderable": false,
                 render: function (data) {
-                    middleName = data.MiddleName == null ? " " : data.MiddleName;
-                    return data.FirstName + " " + middleName + " " + data.LastName;
+                    return data.lastname_Student + " " + data.firstname_Student;
                 }
             },
-            { data: 'DOB', name: 'DOB', "autoWidth": true, "orderable": false },
             {
-                data: null, name: 'DirectManagerId', "autoWidth": true, "orderable": false,
+                data: 'sex', name: 'sex', "autoWidth": true,
                 render: function (data) {
-                    return '<div attr-directManagerId="' + data.DirectManagerId + '">' + data.DirectManager + '</div>';
+                    return data ? '<img src="/Content/icon/icon-boy.jpg" width="42" height="42" />' : '<img src= "/Content/icon/icon-girl.png" width="42" height="42" />';
                 }
             },
+            { data: 'birthDay', name: 'birthDay', "autoWidth": true, "orderable": false },
             {
-                data: 'Gender', name: 'Gender', "autoWidth": true,
+                data: 'urlImage', name: 'urlImage', "autoWidth": true, "orderable": false,
                 render: function (data) {
-                    return data ? '<img src="/Content/image/boy.jpg" width="42" height="42" />' : '<img src= "/Content/image/girl.png" width="42" height="42" />';
+                    return '<img src="' + data +' " width="100" height="100">';
                 }
             },
+         
             {
-                data: "StartDate", name: 'StartDate', "autoWidth": true, "orderable": false
+                data: "quequan", name: 'quequan', "autoWidth": true, "orderable": false
             }
         ]
     });

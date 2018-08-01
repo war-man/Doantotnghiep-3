@@ -7,13 +7,13 @@ namespace DOAN_CHuyenNGanh.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class post : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(post));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806230316182_post"; }
+            get { return "201808011222115_init"; }
         }
         
         string IMigrationMetadata.Source
