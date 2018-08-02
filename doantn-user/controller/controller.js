@@ -6,8 +6,7 @@ app.controller('myCtrl', function ($scope, $http) {
     }).then(function mySuccess(response) {
         $scope.favourited = true;
         $scope.records = response.data;
-        $("#header").owlCarousel({
-        });
+            
     }, function myError(response) {
         $scope.myWelcome = response.statusText;
     });
