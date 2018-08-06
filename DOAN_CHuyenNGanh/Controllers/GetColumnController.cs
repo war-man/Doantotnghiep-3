@@ -26,8 +26,12 @@ namespace DOAN_CHuyenNGanh.Controllers
         public IHttpActionResult Index([FromBody]SetColumnContact value)
         {
             var userid = User.Identity.GetUserId();
-            var teacher = _dbContext.Teachers.Where(a => a.ApplicationUser.Id == value.TeacherId).Single();
-            var res = _dbContext.SetColumnContact.Where(a => a.TeacherId == teacher.Id && a.YearId == value.YearId).Single();
+            var teacher = _dbContext.Teachers.Where(a => a.ApplicationUser.Id == value.TeacherId).SingleOrDefault();
+            if(teacher==null)
+            {
+                return Ok();
+            }
+            var res = _dbContext.SetColumnContact.Where(a => a.TeacherId == teacher.Id && a.YearId == value.YearId).SingleOrDefault();
             return Ok(res);
         }
 

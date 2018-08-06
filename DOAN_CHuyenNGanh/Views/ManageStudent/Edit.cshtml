@@ -1,14 +1,13 @@
 ﻿@model DOAN_CHuyenNGanh.Models.Student
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/css/blueimp-gallery.min.css" crossorigin="anonymous">
-<h2>Tạo mới </h2>
 
-@using (Html.BeginForm("CreateStudent", "ManageStudent", FormMethod.Post,
+<h2>Edit</h2>
+
+@using (Html.BeginForm("EditStudent", "ManageStudent", FormMethod.Post,
                                       new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -17,9 +16,16 @@
             <h4>Học sinh</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
             <div class="form-group">
-                <label class="col-md-2">Họ và Tên lót</label>
+                <div class="col-md-12">
+
+                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                    @Html.EditorFor(model => model.Parent.Id, new { htmlAttributes = new { @class = "form-control", style = "display:none" } })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4">Họ và Tên lót</label>
                 <div class="col-md-12">
 
                     @Html.EditorFor(model => model.lastname_Student, new { htmlAttributes = new { @class = "form-control" } })

@@ -9,11 +9,113 @@
                 <th>Ngày sinh</th>
                 <th>Hình đại diện</th>
                 <th>Quê quán</th>
+                <th style="width:300px">Lớp</th>
+                <th></th>
             </tr>
         </thead>
     </table>
 </div>
+<div class="import-csv">
+    <div id="msgFileCsv" class="alert alert-danger" style="display:none">
+        <strong>Success!</strong> This alert box could indicate a successful or positive action.
+    </div>
+    @{ using (Html.BeginForm("ImportCSV", "ManageStudent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="file" class="btn btn-default" name="FileUpload" value="" />
+            <input type="submit" class="btn btn-primary" name="Submit" id="Submit" value="Import CSV Lớp học" />
+        }
+    }
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Export CSV</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Chọn thông tin để xuất file</h4>
+                </div>
+                <div class="modal-body">
+                    @{ using (Html.BeginForm("ExportCSV", "ManageStudent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+                <div class="form-group">
+                    <label>Chọn khối</label>
+                    <select class="form-control" id="ClassId" name="ClassId">
+                        <option value="0">Tất cả</option>
+                        <option value="6">Khối 6</option>
+                        <option value="7">Khối 7</option>
+                        <option value="8">Khối 8</option>
+                        <option value="9">Khối 9</option>
+                    </select>
+                </div>
+                <div style="display:none" class="form-group" id="showClass" >
+                    <label>Chọn lớp</label>
+                    <select class="form-control" id="Class">
+                        <option value="0">Tất cả</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Chọn năm</label>
+                    <select class="form-control" id="YearId" name="YearId" >
+                        <option value="0">Tất cả</option>
+                    </select>
+                </div>
+
+                <input type="submit" class="btn btn-primary" name="Submit" id="Submit" value="Export CSV Danh sách học sinh" />
+}
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
 <script>
+    $.get("https://doantotnghiephutech.azurewebsites.net/api/CommonApi/GetListYear", function (data) {
+
+        var items = "";
+        $.each(data, function (key, val) {
+            items = items + "<option value=" + val.Id + ">" + val.Name + "</option>";
+        });
+        $("#YearId").append(items);
+
+    });
+    
+      var validCsv = '@ViewBag.isFeedback';
+    
+    if (validCsv != null && validCsv!='')
+    {
+        $('#msgFileCsv').html(validCsv).fadeIn('slow');
+        $('#msgFileCsv').delay(5000).fadeOut('slow');
+    }
+    $(document).ready(function () {
+        $("#ClassId").change(function () {
+            let val = $(this).val();
+            if (val == 0) {
+                $('#showClass').css("display", "none");
+            }
+            else {
+                $('#showClass').css("display", "block");
+                   $("#Class option").remove();
+                $.get("https://doantotnghiephutech.azurewebsites.net/api/CommonApi/GetListClassById/", { Id: $('#ClassId').val() }, function (data) {
+                 
+                    var items = "<option value=" + 0 + ">Tất cả</option>";
+                    $.each(data, function (key, val) {
+                        items = items + "<option value=" + val.Id + ">" + val.name_Class + "</option>";
+                    });
+                    $("#Class").append(items);
+
+                });
+            }
+        });
+    });
     var table = $('#table').DataTable({
         "processing": true,
         "serverSide": true,
@@ -29,32 +131,60 @@
         "lengthMenu": [[5, 10, 15], [5, 10, 15]],
         "language": {
             "search": "",
-            "searchPlaceholder": "Search..."
+            "searchPlaceholder": "Tìm kiếm ..."
+        },
+        language: {
+            "info": "_START_ -> _END_ Tổng số _TOTAL_ học sinh",
+            "paginate": {
+                "first": "Đàu trang",
+                "last": "Cuối trang",
+                "next": ">",
+                "previous": "<"
+            },
+            "search": "Tìm kiếm:",
+            "lengthMenu": "Hiển thị _MENU_ mục",
         },
         "columns": [
             { data: 'Id', name: "Id", "Width": "5%" },
             {
-                data: null, name: 'FullName', "autoWidth": true, "orderable": false,
+                data: null, name: 'FullName', "Width": "5 %", "orderable": false,
                 render: function (data) {
-                    return data.lastname_Student + " " + data.firstname_Student;
+                    console.log(data.Id)
+                    return "<a href='../ManageStudent/Edit/" + data.Id+"'>"+data.lastname_Student+ " " + data.firstname_Student+"";
                 }
             },
             {
-                data: 'sex', name: 'sex', "autoWidth": true,
+                data: 'sex', name: 'sex', "Width": "5%",
                 render: function (data) {
-                    return data ? '<img src="/Content/icon/icon-boy.jpg" width="42" height="42" />' : '<img src= "/Content/icon/icon-girl.png" width="42" height="42" />';
+                    return data ? 'Nam' : 'Nữ';
                 }
             },
-            { data: 'birthDay', name: 'birthDay', "autoWidth": true, "orderable": false },
+            { data: 'birthDay', name: 'birthDay', "Width": "5%", "orderable": false },
             {
-                data: 'urlImage', name: 'urlImage', "autoWidth": true, "orderable": false,
+                data: 'urlImage', name: 'urlImage', "Width": "15%", "orderable": false,
                 render: function (data) {
-                    return '<img src="' + data +' " width="100" height="100">';
+                    return '<img src="' + data + ' " width="100" height="100">';
                 }
             },
-         
+
             {
-                data: "quequan", name: 'quequan', "autoWidth": true, "orderable": false
+                data: "quequan", name: 'quequan', "Width": "5%", "orderable": false
+            },
+            {
+                data: "ClassStudent", name: 'ClassStudent', Width: '25%', "orderable": false,
+                render: function (data) {
+                    var html = '';
+                    for (let i = 0; i < data.length; i++) {
+                        html += '<div class="col-md-8" style="display:inline"><label>' + data[i].Class.name_Class + '</label></div><div class="col-md-8" style="display:inline-block"><label>' + data[i].Year.Name +'</label></div>';
+                    }
+                    return html;
+                }
+            },
+              {
+                data: null, name: '', Width: '5%', "orderable": false,
+                render: function (data) {
+                    return "<a href='../ManageStudent/Edit/"+data.Id+"'><img src='../Content/icon/edit-icon.png' alt='Chỉnh sửa' height='25' width='25'></a>";
+                }
             }
         ]
     });

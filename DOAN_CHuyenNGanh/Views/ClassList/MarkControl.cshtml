@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "MarkControl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+@using (Html.BeginForm("MarkClassControl", "ClassList", FormMethod.Post,
+                                      new { enctype = "multipart/form-data" }))
+{
+    <div class="container">
+        <div id="boardleft" class="col-md-5" style="display: inline-block;">
+            <div class="form-group">
+                <label>Chọn khối</label>
+                <select class="form-control" id="ClassId" name="ClassId">
+                    <option value=""></option>
+                    <option value="6">Khối 6</option>
+                    <option value="7">Khối 7</option>
+                    <option value="8">Khối 8</option>
+                    <option value="9">Khối 9</option>
+                </select>
+            </div>
+            <div style="display:none" class="form-group" id="showClass">
+                <label>Chọn lớp</label>
+                <select class="form-control" id="ClassNameId" name="ClassNameId"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Chọn năm</label>
+                <select class="form-control" id="YearId" name="YearId">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Chọn học kỳ</label>
+                <select class="form-control" id="SemesterId" name="SemesterId">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Chọn môn học</label>
+                <select class="form-control" id="SubjectId" name="SubjectId">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn btn-dark" type="submit">Tiếp tục</button>
+    </div>
+}
+    <script>
+        $("#ClassId").change(function () {
+            let val = $(this).val();
+            if (val == 0) {
+                $('#showClass').css("display", "none");
+            }
+            else {
+                $('#showClass').css("display", "block");
+                $("#Class option").remove();
+                $.get("/api/CommonApi/GetListClassById/", { Id: $('#ClassId').val() }, function (data) {
+
+                    var items = "<option value=''>Tất cả</option>";
+                    $.each(data, function (key, val) {
+                        items = items + "<option value=" + val.Id + ">" + val.name_Class + "</option>";
+                    });
+                    $("#ClassNameId").append(items);
+
+                });
+            }
+        });
+        $.get("/api/CommonApi/GetListYear", function (data) {
+
+            var items = "";
+            $.each(data, function (key, val) {
+                items = items + "<option value=" + val.Id + ">" + val.Name + "</option>";
+            });
+            $("#YearId").append(items);
+
+        });
+        $.get("/api/CommonApi/GetListSemester", function (data) {
+
+            var items = "";
+            $.each(data, function (key, val) {
+                items = items + "<option value=" + val.Id + ">" + val.Name + "</option>";
+            });
+            $("#SemesterId").append(items);
+
+        });
+        $.get("/api/CommonApi/GetListSubject", function (data) {
+
+            var items = "";
+            $.each(data, function (key, val) {
+                items = items + "<option value=" + val.Id + ">" + val.name_Subject + "</option>";
+            });
+            $("#SubjectId").append(items);
+
+        });
+
+    </script>
+

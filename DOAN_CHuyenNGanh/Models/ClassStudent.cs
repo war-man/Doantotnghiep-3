@@ -24,4 +24,13 @@ namespace DOAN_CHuyenNGanh.Models
         [Column(Order = 3)]
         public string YearId { get; set; }
     }
+    public class ClassStudentViewModel
+    {
+
+        public string StudentId { get; set; }
+
+        public string ClassId { get; set; }
+
+        public string YearId { get; set; }
+    }
 }

@@ -32,7 +32,6 @@ namespace DOAN_CHuyenNGanh.Controllers
                 return View(model);
             }
             return RedirectToAction("Login","Account");
-
         }
         [HttpPost]
         public ActionResult Index(SetColumnContact setColumnContact)

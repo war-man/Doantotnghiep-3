@@ -51,7 +51,8 @@ namespace DOAN_CHuyenNGanh.Models
             public string mark_45m3 { get; set; }
             public string mark_45m4 { get; set; }
             public string mark_subjects { get; set ; }
-            public string comment { get; set; }
+        public string mark_average { get; set; }
+        public string comment { get; set; }
             public string comment1 { get; set; }
             public string comment2 { get; set; }
         

@@ -43,7 +43,9 @@ namespace DOAN_CHuyenNGanh.Controllers
                     mark_45m1= contact.mark_45m1,
                     mark_45m2= contact.mark_45m2,
                     mark_45m3= contact.mark_45m3,
-                    mark_45m4= contact.mark_45m4
+                    mark_45m4= contact.mark_45m4,
+                    mark_subjects=contact.mark_subjects,
+                    mark_average=contact.mark_average
                 };
                 _dbContext.Entry(checknull).CurrentValues.SetValues(contacts);
                 _dbContext.SaveChanges();

@@ -612,7 +612,7 @@
                                         {
                                             title: "Giới tính", data: null,
                                             render: function (data) {
-                                                return !data.sex ? "<img src='../Content/icon/icon-girl.png' alt='Chỉnh sửa' height='25' width='25'>" : "<img src='../Content/icon/icon-boy.jpg' alt='Chỉnh sửa' height='25' width='25'>";
+                                                return !data.sex ? "Nữ" : "Nam";
                                             }
                                         },
                                         {
@@ -644,7 +644,7 @@
                                             searchable: false,
                                             width: "2%",
                                             render: function (data) {
-                                                return data.status_deleted ? "<button onclick='DeleteTeacher(\"" + data.Id + "\");'  class='btn btn-danger'>Inactive</button>" : "<button onclick='DeleteTeacher(\"" + data.Id +"\");' class='btn btn-success'>Active</button>";
+                                                return data.status_deleted ? "<button onclick='DeleteTeacher(\"" + data.Id + "\");'  class='btn btn-danger'>Không hoạt động</button>" : "<button onclick='DeleteTeacher(\"" + data.Id +"\");' class='btn btn-success'>Hoạt động</button>";
                                             }
                                         },
                                         {
@@ -732,6 +732,7 @@
                     number_social_insurance = $('#number_social_insurance').val(response.result.data.number_social_insurance);
                     prefecture = $('#prefecture').val(response.result.data.prefecture);
                     idTeacher = $('#idTeacher').val(response.result.data.Id);
+                    subjectId = $('#subject').val(response.result.data.SubjectId);
                     if (prefecture != "") {
                         $.getJSON("/Content/file/city.json", function (data) {
                             var items = "<option value=''>Chọn Thành Phố</option>";;

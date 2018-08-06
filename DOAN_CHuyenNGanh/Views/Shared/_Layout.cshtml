@@ -35,7 +35,7 @@
             @Html.Partial("_LoginPartial")
         </div>
     </nav>
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="navbar-primary ">
 
             <ul class="navbar-primary-menu">
@@ -45,6 +45,7 @@
                         <li><a id="test" href="/Subjects/Index"><span class="nav-label">Quản lý môn học</span></a> </li>
                         <li><a id="test" href="/Semesters/Index"><span class="nav-label">Quản lý học kỳ</span></a> </li>
                         <li><a id="test" href="/Years/Index"><span class="nav-label">Quản lý năm học</span></a> </li>
+                        <li><a id="test" href="/Classes/Index"><span class="nav-label">Quản lý lớp học</span></a> </li>
                     </ul>
                     <a href="#" id="title-roll" class="show-action-menu-2"><img width="40" height="40" src="~/Content/Image/teacher.png" /><span class="nav-label">Quản lí thông tin giáo viên</span></a>
                     <ul id="action-menu-hide" class="action-menu-2">
@@ -54,10 +55,10 @@
                     </ul>
                     <a href="#" id="title-roll" class="show-action-menu-1"><img width="40" height="40" src="~/Content/Image/student.png" /><span class="nav-label">Quản lí học sinh</span></a>
                     <ul id="action-menu-hide" class="action-menu-1">
-                        <li><a id="test" href="#"><span class="nav-label">Thông tin </span></a> </li>
-                        <li><a id="test" href="#"><span class="nav-label">Lớp</span></a> </li>
+                        <li><a id="test" href="/ManageStudent/Index"><span class="nav-label">Thông tin </span></a> </li>
+                        <li><a id="test" href="/ManageStudent/ClassStudent"><span class="nav-label">Lớp</span></a> </li>
                         <li><a id="test" href="#"><span class="nav-label">Thời khóa biểu</span></a> </li>
-                        <li><a id="test" href="#"><span class="nav-label">Điểm số</span></a> </li>
+                        <li><a id="test" href="/ClassList/MarkControl"><span class="nav-label">Điểm số</span></a> </li>
                         <li><a id="test" href="#"><span class="nav-label"> Hạnh kiểm</span></a> </li>
                     </ul>
                     <a href="#" id="title-roll" class="show-action-menu-3"><img width="40" height="40" src="~/Content/Image/parent.png" /><span class="nav-label">Quản lí thông tin phụ huynh</span></a>
@@ -77,7 +78,7 @@
                         <li><a id="test" href="#"><span class="nav-label">Thông báo</span></a> </li>
                     </ul>
                     <a href="#" id="title-roll" class="show-action-menu"><img width="40" height="40" src="~/Content/Image/setting-icon.png" /><span class="nav-label">Cài đặt chung</span></a>
-                    
+
                     <ul id="action-menu-hide" class="action-menu">
                         <li><a id="test" href="/Posts/Index"><span class="nav-label">Quản lý bài đăng</span></a> </li>
                         <li><a id="test" href="/Categories/Index"><span class="nav-label">Loại Bài Đăng</span></a> </li>
@@ -85,17 +86,35 @@
                 </li>
 
             </ul>
-            <a class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"><</span></a> 
+            <a class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"><</span></a>
         </div>
-            <div class="body-content">
-                @RenderBody()
-            </div>
-           
-            @*<hr />*@
-            @*<footer>
+        <div class="body-content">
+            @RenderBody()
+        </div>
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <script>
+(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
+        <!-- Your customer chat code -->
+        <div class="fb-customerchat"
+             attribution=setup_tool
+             page_id="1617664511695699"
+             theme_color="#0084ff"
+             logged_in_greeting="Chào bạn! Bạn có phản hồi xin để lại ở dưới nhé!"
+             logged_out_greeting="Chào bạn! Bạn có phản hồi xin để lại ở dưới nhé!">
+        </div>
+        @*<hr />*@
+        @*<footer>
 
 
-            </footer>*@
+        </footer>*@
     </div>
 </body>
 </html>

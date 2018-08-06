@@ -28,6 +28,8 @@ namespace DOAN_CHuyenNGanh.Models
         [Required]
         public string address { get; set; }
         [Required]
+        public string email { get; set; }
+        [Required]
         public string phonenumber { get; set; }
 
         [Required]

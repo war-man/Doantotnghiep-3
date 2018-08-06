@@ -57,6 +57,8 @@ namespace DOAN_CHuyenNGanh.Models.ViewModels
 
         [Required]
         public long identity_card_number { get; set; }
+        [Required]
+        public string subject { get; set; }
 
         [Required]
         [StringLength(255, MinimumLength = 3, ErrorMessage = "Năng khiếu từ 3 ký tự đến 255 kí tự")]

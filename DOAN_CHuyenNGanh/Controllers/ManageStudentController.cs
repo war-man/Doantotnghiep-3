@@ -13,6 +13,15 @@ using System.Web.WebPages;
 using Microsoft.AspNet.Identity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
+using System.Data;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Configuration;
+using System.Data.SqlClient;
+using DOAN_CHuyenNGanh.Controllers.ViewModel;
+using CsvHelper;
+using System.Text;
 
 namespace DOAN_CHuyenNGanh.Controllers
 {
@@ -37,6 +46,12 @@ namespace DOAN_CHuyenNGanh.Controllers
         // GET: ManageStudent
         public ActionResult Index()
         {
+            var isFeedback = TempData["Feedback"];
+            if (isFeedback != null)
+            {
+                ViewBag.isFeedback = isFeedback;
+                return View();
+            }
             return View();
         }
 
@@ -44,22 +59,41 @@ namespace DOAN_CHuyenNGanh.Controllers
         {
             return View();
         }
+        public ActionResult Edit(string Id)
+        {
+            var temp = db.Students.Include("Parent").Where(a => a.Id == Id).SingleOrDefault();
+            return View(temp);
+        }
+        [HttpPost]
+        public ActionResult EditStudent(Student student)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(student).State = EntityState.Modified;
+                db.Entry(student.Parent).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(student);
+        }
         [HttpPost]
         public ActionResult CreateStudent(Student student)
         {
             var Id = (from s in db.Students
                       select s.Id).Count();
             var IdParents = (from s in db.Parents
-                      select s.Id).Count();
+                             select s.Id).Count();
             student.Id = "HS" + (Id + 1);
-            student.Parent.Id="PH" + (IdParents + 1);
+            student.Parent.Id = "PH" + (IdParents + 1);
             ApplicationUser studentAccount = new ApplicationUser
             {
-                UserName = student.Id,
+                UserName = student.email,
+                Email = student.email,
             };
             ApplicationUser parentAccount = new ApplicationUser
             {
-                UserName = student.Parent.Id,
+                UserName = student.Parent.email,
+                Email = student.Parent.email,
             };
 
             student.ApplicationUser = studentAccount;
@@ -67,14 +101,15 @@ namespace DOAN_CHuyenNGanh.Controllers
             db.Students.Add(student);
             db.Parents.Add(student.Parent);
             db.SaveChanges();
-            UserManager.AddPassword(student.Id, $"{student.Id}12345");
-            UserManager.AddToRoles(student.Id, "Student");
-            UserManager.AddPassword(student.Parent.Id, $"{student.Parent.Id}12345");
-            UserManager.AddToRoles(student.Parent.Id, "Parent");
-            return Json(new
-            { result = new { resultCode = "10", message = "Tạo tài khoản và thông tin học sinh và phụ huynh thành công" } }, JsonRequestBehavior.AllowGet);
+            string studentPassword = $"{student.Id}abc@12345";
+            string parentPassword = $"{parentAccount.Id}abc@12345";
+            UserManager.AddPassword(studentAccount.Id, studentPassword);
+            UserManager.AddToRole(studentAccount.Id, "Student");
 
-            return View();
+            UserManager.AddPassword(parentAccount.Id, parentPassword);
+            UserManager.AddToRole(parentAccount.Id, "Parent");
+
+            return View("Index");
         }
         public JsonResult CustomServerSideSearchAction(DataTableAjaxPostModel model)
         {
@@ -85,8 +120,6 @@ namespace DOAN_CHuyenNGanh.Controllers
                 int totalResultsCount;
 
                 var res = YourCustomSearchFunc(model, out filteredResultsCount, out totalResultsCount);
-
-                //var result = GetListContactViewModel(res);
 
                 return Json(new
                 {
@@ -126,7 +159,7 @@ namespace DOAN_CHuyenNGanh.Controllers
         //    return result;
         //}
 
-        public IList<Student> YourCustomSearchFunc(DataTableAjaxPostModel model, out int filteredResultsCount, out int totalResultsCount)
+        public IList<StudentViewModel> YourCustomSearchFunc(DataTableAjaxPostModel model, out int filteredResultsCount, out int totalResultsCount)
         {
             var searchBy = (model.search != null) ? model.search.value : null;
             var take = model.length;
@@ -147,7 +180,7 @@ namespace DOAN_CHuyenNGanh.Controllers
             if (result == null)
             {
                 // empty collection...
-                return new List<Student>();
+                return new List<StudentViewModel>();
             }
             return result;
         }
@@ -155,7 +188,7 @@ namespace DOAN_CHuyenNGanh.Controllers
         {
             return FilterSearch(searchValue);
         }
-        public List<Student> GetDataFromDbase(string searchBy, int take, int skip, string sortBy, bool sortDir, out int filteredResultsCount, out int totalResultsCount)
+        public List<StudentViewModel> GetDataFromDbase(string searchBy, int take, int skip, string sortBy, bool sortDir, out int filteredResultsCount, out int totalResultsCount)
         {
             // the example datatable used is not supporting multi column ordering
             // so we only need get the column order from the first column passed to us.        
@@ -167,18 +200,39 @@ namespace DOAN_CHuyenNGanh.Controllers
                 sortBy = "Id";
                 sortDir = true;
             }
-    
+
 
             // now just get the count of items (without the skip and take) - eg how many could be returned with filtering
-           return GetListNonSearch(whereClause, sortBy, sortDir, out filteredResultsCount, out totalResultsCount, take, skip);
-           
+            return GetListNonSearch(whereClause, sortBy, sortDir, out filteredResultsCount, out totalResultsCount, take, skip);
+
 
         }
-        public List<Student> GetListNonSearch(Expression<Func<Student, bool>> whereClause, string sortBy, bool sortDir, out int filteredResultsCount, out int totalResultsCount, int take, int skip)
+        public ActionResult ClassStudent()
         {
+            return View();
+        }
+
+
+        public List<StudentViewModel> GetListNonSearch(Expression<Func<Student, bool>> whereClause, string sortBy, bool sortDir, out int filteredResultsCount, out int totalResultsCount, int take, int skip)
+        {
+            var classtudent = db.ClassStudent.Include("Class").Include("Year").ToList();
             var result = db.Students
                              .AsExpandable()
                              .Where(whereClause)
+                                                          .Select(a => new StudentViewModel
+                                                          {
+                                                              quequan = a.quequan,
+                                                              Id = a.Id,
+                                                              lastname_Student = a.lastname_Student,
+                                                              firstname_Student = a.firstname_Student,
+                                                              sex = a.sex,
+                                                              urlImage = a.urlImage,
+                                                              address = a.address,
+                                                              ApplicationUser = a.ApplicationUser,
+                                                              birthDay = a.birthDay,
+                                                              birth_place = a.birth_place,
+                                                              ClassStudent = db.ClassStudent.Where(s => s.StudentId == a.Id).ToList()
+                                                          })
                              .OrderBy(sortBy, sortDir)
                              .Skip(skip)
                              .Take(take)
@@ -225,7 +279,7 @@ namespace DOAN_CHuyenNGanh.Controllers
             switch (searchTerms.Count)
             {
                 case 1:
-                    predicate = predicate.And(s => searchTerms.Any(srch => s.firstname_Student.ToLower().Contains(srch)));
+                    predicate = predicate.Or(s => searchTerms.Any(srch => s.firstname_Student.ToLower().Contains(srch)));
                     predicate = predicate.Or(s => searchTerms.Any(srch => s.lastname_Student.ToLower().Contains(srch)));
 
                     break;
@@ -234,13 +288,163 @@ namespace DOAN_CHuyenNGanh.Controllers
                     predicate = predicate.And(s => searchTerms.Any(srch => s.lastname_Student.ToLower().Contains(srch)));
                     break;
                 case 3:
-                    predicate = predicate.Or(s => searchTerms.Any(srch => s.firstname_Student.ToLower().Contains(srch)));
-                    predicate = predicate.Or(s => searchTerms.Any(srch => s.lastname_Student.ToLower().Contains(srch)));
+                    predicate = predicate.And(s => searchTerms.Any(srch => s.firstname_Student.ToLower().Contains(srch)));
+                    predicate = predicate.And(s => searchTerms.Any(srch => s.lastname_Student.ToLower().Contains(srch)));
                     break;
                 default:
                     break;
             }
             return predicate;
+        }
+
+        [HttpPost]
+        public ActionResult ExportCSV(ExportStudentViewModel exportStudentViewModel)
+        {
+            try
+            {
+                var stream = new MemoryStream();
+                var writer = new StreamWriter(stream);
+                var csv = new CsvWriter(writer);
+                csv.WriteRecords(db.Students.Include("ApplicationUser").Include("Parent").AsEnumerable());
+                writer.Flush();
+                stream.Position = 0;
+
+                TempData["Feedback"] = "Xuất file thành công";
+                return File(stream, "text/csv", "export.csv");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                TempData["Feedback"] = ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ImportCSV(HttpPostedFileBase FileUpload)
+        {
+            try
+            {
+                if (FileUpload == null)
+                {
+                    //TempData[Common.TempDataName.Feedback] = Common.ResultMessages.PlsSelectFile;
+                    return RedirectToAction("Index");
+                }
+                DataTable dt = new DataTable() { };
+
+
+                if (FileUpload.ContentLength > 0)
+                {
+
+                    string fileName = Path.GetFileName(FileUpload.FileName);
+                    string path = Path.Combine(@"e:\", fileName);
+                    int countBlankContentLines;
+                    int countSumLines;
+                    try
+                    {
+                        FileUpload.SaveAs(path);
+
+                        dt = ProcessCSV(path, out countBlankContentLines, out countSumLines);
+
+                        ViewData["Feedback"] = ProcessBulkCopy(dt);
+
+                        ViewData["Feedback"] += string.Format(",Tổng dòng {1},Dòng nội dung trống :{0}", countBlankContentLines, countSumLines);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        log.Error(ex.Message);
+                        ViewData["Feedback"] = ex.Message;
+                    }
+                }
+                else
+                {
+
+                    ViewData["Feedback"] = "Vui lòng chọn file";
+                }
+
+
+                dt.Dispose();
+                TempData["Feedback"] = ViewData["Feedback"];
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                TempData["Feedback"] = ex.Message;
+                return View("Index");
+            }
+        }
+        public string ProcessBulkCopy(DataTable dt)
+        {
+            string Feedback = string.Empty;
+            string connString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+
+                using (var copy = new SqlBulkCopy(conn))
+                {
+
+                    conn.Open();
+                    copy.DestinationTableName = "CLassStudents";
+                    copy.BatchSize = dt.Rows.Count;
+                    try
+                    {
+
+                        copy.WriteToServer(dt);
+                        Feedback = "Upload thành công";
+                    }
+                    catch (Exception ex)
+                    {
+                        Feedback = ex.Message;
+                    }
+                }
+            }
+
+            return Feedback;
+        }
+        public DataTable ProcessCSV(string fileName, out int countBlankContentLines, out int countSumLines)
+        {
+            string line = string.Empty;
+            string[] strArray;
+            DataTable dt = new DataTable();
+            DataRow row;
+
+
+            Regex r = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+
+
+            StreamReader sr = new StreamReader(fileName);
+
+
+            line = sr.ReadLine();
+            strArray = r.Split(line);
+
+
+            Array.ForEach(strArray, s => dt.Columns.Add(s));
+
+            countBlankContentLines = 0;
+            countSumLines = 0;
+            while ((line = sr.ReadLine()) != null)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    countBlankContentLines++;
+                }
+                else
+                {
+                    row = dt.NewRow();
+                    row.ItemArray = r.Split(line);
+                    dt.Rows.Add(row);
+                }
+                countSumLines++;
+            }
+            sr.Dispose();
+
+            return dt;
+
         }
     }
 

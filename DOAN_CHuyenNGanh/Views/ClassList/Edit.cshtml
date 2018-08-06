@@ -32,27 +32,28 @@
    
         @foreach (var item in Model.Contact)
         {
-            <tr>
-                <td><label >@item.Student.firstname_Student</label></td>
-                <td class="rowMark" id="row5m_1" ><input class="form-control input-group-sm"  name="@item.Student.Id+mark_5m1" for="@item.Student.Id+mark_5m1" id="@item.Student.Id" type="text" value="@item.mark_5m1" ></td>
-                <td class="rowMark" id="row5m_2" ><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m2" for="@item.Student.Id+mark_5m2" id="@item.Student.Id" type="text" value="@item.mark_5m2" ></td>
-                <td class="rowMark" id="row5m_3" ><input  class="form-control input-group-sm" name="@item.Student.Id+mark_5m3" for="@item.Student.Id+mark_5m3" id="@item.Student.Id" type="text" value="@item.mark_5m3" ></td>
-                <td class="rowMark" id="row5m_4" ><input class="form-control input-group-sm"  name="@item.Student.Id+mark_5m4" for="@item.Student.Id+mark_5m4" id="@item.Student.Id" type="text" value="@item.mark_5m4" ></td>
-                <td class="rowMark" id="row5m_5" ><input class="form-control input-group-sm"  name="@item.Student.Id+mark_5m5" for="@item.Student.Id+mark_5m5" id="@item.Student.Id" type="text" value="@item.mark_5m5" ></td>
+        <tr>
+            <td><label>@item.Student.lastname_Student @item.Student.firstname_Student</label></td>
+            <td class="rowMark" id="row5m_1"><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m1" for="@item.Student.Id+mark_5m1" id="@item.Student.Id" type="text" value="@item.mark_5m1"></td>
+            <td class="rowMark" id="row5m_2"><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m2" for="@item.Student.Id+mark_5m2" id="@item.Student.Id" type="text" value="@item.mark_5m2"></td>
+            <td class="rowMark" id="row5m_3"><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m3" for="@item.Student.Id+mark_5m3" id="@item.Student.Id" type="text" value="@item.mark_5m3"></td>
+            <td class="rowMark" id="row5m_4"><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m4" for="@item.Student.Id+mark_5m4" id="@item.Student.Id" type="text" value="@item.mark_5m4"></td>
+            <td class="rowMark" id="row5m_5"><input class="form-control input-group-sm" name="@item.Student.Id+mark_5m5" for="@item.Student.Id+mark_5m5" id="@item.Student.Id" type="text" value="@item.mark_5m5"></td>
 
-                <td class="rowMark" id="row15m_1" ><input class="form-control input-group-sm"  name="@item.Student.Id+mark_15m1" for="@item.Student.Id+mark_15m1" id="@item.Student.Id" type="text" value="@item.mark_15m1" ></td>
-                <td class="rowMark" id="row15m_2" ><input class="form-control input-group-sm"  name="@item.Student.Id+mark_15m2" for="@item.Student.Id+mark_15m2" id="@item.Student.Id" type="text" value="@item.mark_15m2" ></td>
-                <td class="rowMark" id="row15m_3"><input class="form-control input-group-sm"  name="@item.Student.Id+mark_15m3" for="@item.Student.Id+mark_15m3" id="@item.Student.Id" type="text" value="@item.mark_15m3" ></td>
-                <td class="rowMark" id="row15m_4"><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m4" for="@item.Student.Id+mark_15m4" id="@item.Student.Id" type="text" value="@item.mark_15m4" ></td>
-                <td class="rowMark" id="row15m_5" ><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m5" for="@item.Student.Id+mark_15m5" id="@item.Student.Id" type="text" value="@item.mark_15m5" ></td>
-               
-                <td class="rowMark" id="row45m_1" ><input class="form-control input-group-sm"  name="@item.Student.Id+mark_45m1" for="@item.Student.Id+mark_45m1" id="@item.Student.Id" type="text" value="@item.mark_45m1" ></td>
-                <td class="rowMark" id="row45m_2" ><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m2" for="@item.Student.Id+mark_45m2" id="@item.Student.Id" type="text" value="@item.mark_45m2" ></td>
-                <td class="rowMark" id="row45m_3" ><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m3" for="@item.Student.Id+mark_45m3" id="@item.Student.Id" type="text" value="@item.mark_45m3" ></td>
-                <td class="rowMark" id="row45m_4"><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m4" for="@item.Student.Id+mark_45m4" id="@item.Student.Id" type="text" value="@item.mark_45m4" ></td>
-               
-                <td><input class="form-control input-group-sm" name="@item.Student.Id+mark_subjects" for="@item.Student.Id+mark_subjects" id="@item.Student.Id" type="text" value="@item.mark_subjects" ></td>   
-            </tr>
+            <td class="rowMark" id="row15m_1"><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m1" for="@item.Student.Id+mark_15m1" id="@item.Student.Id" type="text" value="@item.mark_15m1"></td>
+            <td class="rowMark" id="row15m_2"><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m2" for="@item.Student.Id+mark_15m2" id="@item.Student.Id" type="text" value="@item.mark_15m2"></td>
+            <td class="rowMark" id="row15m_3"><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m3" for="@item.Student.Id+mark_15m3" id="@item.Student.Id" type="text" value="@item.mark_15m3"></td>
+            <td class="rowMark" id="row15m_4"><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m4" for="@item.Student.Id+mark_15m4" id="@item.Student.Id" type="text" value="@item.mark_15m4"></td>
+            <td class="rowMark" id="row15m_5"><input class="form-control input-group-sm" name="@item.Student.Id+mark_15m5" for="@item.Student.Id+mark_15m5" id="@item.Student.Id" type="text" value="@item.mark_15m5"></td>
+
+            <td class="rowMark" id="row45m_1"><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m1" for="@item.Student.Id+mark_45m1" id="@item.Student.Id" type="text" value="@item.mark_45m1"></td>
+            <td class="rowMark" id="row45m_2"><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m2" for="@item.Student.Id+mark_45m2" id="@item.Student.Id" type="text" value="@item.mark_45m2"></td>
+            <td class="rowMark" id="row45m_3"><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m3" for="@item.Student.Id+mark_45m3" id="@item.Student.Id" type="text" value="@item.mark_45m3"></td>
+            <td class="rowMark" id="row45m_4"><input class="form-control input-group-sm" name="@item.Student.Id+mark_45m4" for="@item.Student.Id+mark_45m4" id="@item.Student.Id" type="text" value="@item.mark_45m4"></td>
+
+            <td><input class="form-control input-group-sm" name="@item.Student.Id+mark_subjects" for="@item.Student.Id+mark_subjects" id="@item.Student.Id" type="text" value="@item.mark_subjects"></td>
+            <td><input class="form-control input-group-sm" name="@item.Student.Id+mark_average" for="@item.Student.Id+mark_average" id="@item.Student.Id" type="text" value="@item.mark_average"></td>
+        </tr>
         }
      
     </table>
@@ -85,6 +86,9 @@
                     var mark_45m2 = $("input[name='" + studentid + "+mark_45m2']").val();
                     var mark_45m3 = $("input[name='" + studentid + "+mark_45m3']").val();
                     var mark_45m4 = $("input[name='" + studentid + "+mark_45m4']").val();
+                    var mark_subjects = $("input[name='" + studentid + "+mark_subjects']").val();
+                    var mark_average = summarkAvegare(studentid);
+                  
                     var contact = {
                         ClassId: ClassId, SubjectId: SubjectId, YearId: YearId, SemesterId: SemesterId, StudentId: studentid,
                         mark_5m1: mark_5m1,
@@ -100,26 +104,75 @@
                         mark_45m1: mark_45m1,
                         mark_45m2: mark_45m2,
                         mark_45m3: mark_45m3,
-                        mark_45m4: mark_45m4
+                        mark_45m4: mark_45m4,
+                        mark_subjects: mark_subjects,
+                        mark_average: mark_average
                     };
               
                     return contact;
                 }
+                function summarkAvegare(studentid) {
+                    var mark_5m1 = summark(parseFloat($("input[name='" + studentid + "+mark_5m1']").val()));
+                    var mark_5m2 = summark(parseFloat($("input[name='" + studentid + "+mark_5m2']").val()));
+                    var mark_5m3 = summark(parseFloat($("input[name='" + studentid + "+mark_5m3']").val()));
+                    var mark_5m4 = summark(parseFloat($("input[name='" + studentid + "+mark_5m4']").val()));
+                    var mark_5m5 = summark(parseFloat($("input[name='" + studentid + "+mark_5m5']").val()));
 
 
+                    var mark_15m1 = summark(parseFloat($("input[name='" + studentid + "+mark_15m1']").val()));
+                    var mark_15m2 = summark(parseFloat($("input[name='" + studentid + "+mark_15m2']").val()));
+                    var mark_15m3 = summark(parseFloat($("input[name='" + studentid + "+mark_15m3']").val()));
+                    var mark_15m4 = summark(parseFloat($("input[name='" + studentid + "+mark_15m4']").val()));
+                    var mark_15m5 = summark(parseFloat($("input[name='" + studentid + "+mark_15m5']").val()));
 
+                    var mark_45m1 = summark(parseFloat($("input[name='" + studentid + "+mark_45m1']").val()));
+                    var mark_45m2 = summark(parseFloat($("input[name='" + studentid + "+mark_45m2']").val()));
+                    var mark_45m3 = summark(parseFloat($("input[name='" + studentid + "+mark_45m3']").val()));
+                    var mark_45m4 = summark(parseFloat($("input[name='" + studentid + "+mark_45m4']").val()));
+
+                    var mark_subjects = summark(parseFloat($("input[name='" + studentid + "+mark_subjects']").val()));
+                    let sum = ((mark_5m1 + mark_5m2 + mark_5m3 + mark_5m4 + mark_5m5) + (mark_15m1 + mark_15m2 + mark_15m3 + mark_15m4 + mark_15m5) + ((mark_45m1 + mark_45m2 + mark_45m3 + mark_45m4) * 2) + (mark_subjects * 3)) / (summarkheso1(mark_5m1) + summarkheso1(mark_5m2) + summarkheso1(mark_5m3) + summarkheso1(mark_5m4) + summarkheso1(mark_5m5) + summarkheso1(mark_15m1) + summarkheso1(mark_15m2) + summarkheso1(mark_15m3) + summarkheso1(mark_15m4) + summarkheso1(mark_15m5) + summarkheso2(mark_45m1) + summarkheso2(mark_45m2) + summarkheso2(mark_45m3) + summarkheso2(mark_45m4) + summarkheso3(mark_subjects))
+                    $("input[name='" + studentid + "+mark_average']").val(sum);
+                    return sum;
+                }
+                function summark(value) {
+                    if (value == null || isNaN(value) || value == '') {
+                        return 0;
+                    }
+                    return value;
+                }
+                function summarkheso1(value) {
+                    if (value == null || isNaN(value)|| value=='') {
+                        return 0;
+                    }
+                    return 1;
+                }
+                function summarkheso2(value) {
+                    if (value == null || isNaN(value) || value == '') {
+                        return 0;
+                    }
+                    return 2;
+                }
+                function summarkheso3(value) {
+                    if (value == null || isNaN(value) || value == '') {
+                        return 0;
+                    }
+                    return 3;
+                }
                 $("input[type='text']").change(function (e) {
                     var studentid = $(this).attr('id');
                     var mark = $(this).val();
                     var idmrak = $(this).attr('name');
-                    console.log(e);
+                   
                     if (mark > 10 || mark < 0 || isNaN(mark))
                     {
                         $(this).val('');
                         alert("Nhập sai điểm");
                     }
                     else {
+                
                         var contact = addmrak(studentid);
+                      
                         var x;
                         for (x in contact) {
 

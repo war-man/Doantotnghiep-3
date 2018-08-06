@@ -4,15 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Quản lý thông tin tài khoản</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Tạo mới")
+    @Html.ActionLink("Tạo mới", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+           Tên người dùng
         </th>
         <th>
 
@@ -26,9 +26,9 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Chỉnh sửa", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Chi tiết", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Xóa", new { id = item.Id })
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Chi tiết ", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

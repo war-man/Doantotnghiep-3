@@ -39,7 +39,7 @@ namespace DOAN_CHuyenNGanh.Models
                 var roleaction = new RoleAction
                 {
                     ActionId = temp,
-                    RoleId = "1",
+                    RoleId = "fde60f1d-31f8-467b-919f-2913a4882064",
                 };
                 _dbContext.Actions.Add(actions);
                 _dbContext.RoleActions.Add(roleaction);

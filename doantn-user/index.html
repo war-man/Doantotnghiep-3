@@ -11,6 +11,7 @@
     <script src="Scripts/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </head>
+
 <body ng-app="app">
     <div class="wrapper col0">
 
@@ -244,6 +245,26 @@
             <p class="fl_right">Template by <a href="http://www.os-templates.com/" title="Free Website Templates">OS Templates</a></p>
             <br class="clear" />
         </div>
+    </div>
+    <!-- Load Facebook SDK for JavaScript -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="1617664511695699"
+         theme_color="#0084ff"
+         logged_in_greeting="Chào bạn! Bạn có phản hồi xin để lại ở dưới nhé!"
+         logged_out_greeting="Chào bạn! Bạn có phản hồi xin để lại ở dưới nhé!">
     </div>
 </body>
 </html>

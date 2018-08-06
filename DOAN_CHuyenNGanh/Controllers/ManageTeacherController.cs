@@ -71,7 +71,8 @@ namespace DOAN_CHuyenNGanh.Controllers
                         teacherChangeInfomation.birth_place = teacherViewModel.birth_place;
                         teacherChangeInfomation.matrimony = teacherViewModel.matrimony;
                         teacherChangeInfomation.name_birth_place = teacherViewModel.name_birth_place;
-
+                        teacherChangeInfomation.Subject = _dbContext.Subjects.SingleOrDefault(a => a.Id == teacherViewModel.subject);
+                        teacherChangeInfomation.SubjectId = teacherViewModel.subject;
                         //thông tin liên lạc
                         teacherChangeInfomation.phone_number = teacherViewModel.phone_number;
                         teacherChangeInfomation.email = teacherViewModel.email;
@@ -173,6 +174,7 @@ namespace DOAN_CHuyenNGanh.Controllers
                         teacherChangeInfomation.gifted = teacherViewModel.gifted;
                         teacherChangeInfomation.status_deleted = false;
                         teacherChangeInfomation.Subject = _dbContext.Subjects.SingleOrDefault(a=>a.Id== teacherViewModel.subject);
+                        teacherChangeInfomation.SubjectId = teacherViewModel.subject;
                         //Get Id teacher
 
                         _dbContext.SaveChanges();

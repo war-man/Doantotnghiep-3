@@ -1,0 +1,200 @@
+﻿
+@{
+    ViewBag.Title = "ClassStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #sortable1, #sortable2 {
+        border: 5px double #eee;
+        width: 300px;
+        min-height: 20px;
+        list-style-type: none;
+        margin: 0;
+        padding: 5px 0 0 0;
+        float: left;
+        margin-right: 10px;
+    }
+
+        #sortable1 li, #sortable2 li {
+            margin: 0 5px 5px 5px;
+            padding: 5px;
+            font-size: 1.2em;
+            width: 120px;
+        }
+    #boardleft {
+        border: 1px solid #eee;
+    }
+
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#sortable1, #sortable2").sortable({
+            connectWith: ".connectedSortable"
+        }).disableSelection();
+    });
+</script>
+<h2>Sắp lớp học</h2>
+<div class="container-fluid">
+    <div id="boardleft" class="col-md-3" style="display: inline-block;">
+        <div class="form-group">
+            <label>Chọn khối</label>
+            <select class="form-control" id="ClassId" name="ClassId">
+                <option value=""></option>
+                <option value="6">Khối 6</option>
+                <option value="7">Khối 7</option>
+                <option value="8">Khối 8</option>
+                <option value="9">Khối 9</option>
+            </select>
+        </div>
+        <div style="display:none" class="form-group" id="showClass">
+            <label>Chọn lớp</label>
+            <select class="form-control" id="Class"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Chọn năm</label>
+            <select class="form-control" id="YearId" name="YearId">
+                <option value=""></option>
+            </select>
+        </div>
+        <button id="drapdropStudentforClass" class="btn btn-dark">Tiếp tục</button>
+        <br /><br />
+        <div id="StudentforClass" style="display:none">
+            <button id="saveStudentforClass" class="btn btn-primary">Lưu</button>
+            <br /><br />
+            <a href="../ManageStudent/ClassStudent" class="btn btn-primary">Làm mới</a>
+        </div>
+
+    </div>
+    <div id="sortCLass"  class="col-md-8" style="display: none; position: absolute;">
+        <div class="col-md-4">
+            <h2 id="titleClass"></h2>
+            <ul id="sortable1" class="connectedSortable">
+
+            </ul>
+        </div>
+       
+
+        <ul id="sortable2" class="connectedSortable">
+            <li class="ui-state-highlight">
+               
+            </li>
+        </ul>
+    </div>
+
+</div>
+   
+<script>
+    $(document).ready(function () {
+        $("#ClassId").change(function () {
+            let val = $(this).val();
+            if (val == 0) {
+                $('#showClass').css("display", "none");
+            }
+            else {
+                $('#showClass').css("display", "block");
+                $("#Class option").remove();
+                $.get("https://doantotnghiephutech.azurewebsites.net/api/CommonApi/GetListClassById/", { Id: $('#ClassId').val() }, function (data) {
+
+                    var items = "<option value=''>Tất cả</option>";
+                    $.each(data, function (key, val) {
+                        items = items + "<option value=" + val.Id + ">" + val.name_Class + "</option>";
+                    });
+                    $("#Class").append(items);
+
+                });
+            }
+        });
+        $.get("https://doantotnghiephutech.azurewebsites.net/api/CommonApi/GetListYear", function (data) {
+
+            var items = "";
+            $.each(data, function (key, val) {
+                items = items + "<option value=" + val.Id + ">" + val.Name + "</option>";
+            });
+            $("#YearId").append(items);
+
+        });
+ 
+        $('#drapdropStudentforClass').click(function () {
+            let ClassId = $('#ClassId').val();
+            let Class = $('#Class').val();
+            let YearId = $('#YearId').val();
+            if (checkNull(ClassId) && checkNull(Class) && checkNull(YearId)) {
+                $('#sortCLass').css("display", "inline-block");
+                $('#StudentforClass').css("display", "block");
+                
+                $('#titleClass').text("Lớp" + $('#Class').val());
+                $('#ClassId').prop('disabled', true);
+                $('#Class').prop('disabled', true);
+                $('#YearId').prop('disabled', true);
+                $('#drapdropStudentforClass').prop('disabled', true);
+                var dataGetListStudentSortClass = {
+                    YearId: $('#YearId').val(),
+                    ClassId: $('#Class').val(),
+                }
+                $.post("https://doantotnghiephutech.azurewebsites.net/api/CommonApi/GetListStudentSortClass/", dataGetListStudentSortClass, function (data) {
+
+                    var items = "";
+                    $.each(data, function (key, val) {
+                        items = items + '<div class="card" studentId="' + val.Id+'" style="width: 18rem;"><div class="card-body"><p class="card-text">Mã số:' + val.Id + '</p><p class="card-text">Họ tên:' + val.firstname_Student + ' ' + val.lastname_Student + '</p><p class="card-text">Ngày sinh:' + val.birthDay + '</p></div></div>';
+                    });
+                    $("#sortable2").append(items);
+
+                });
+                $.post("https://doantotnghiephutech.azurewebsites.net/api/CommonApi/GetListStudentInClass/", dataGetListStudentSortClass, function (data) {
+
+                    var items = "";
+                    $.each(data, function (key, val) {
+                        items = items + '<div class="card" studentId="' + val.Id + '" style="width: 18rem;"><div class="card-body"><p class="card-text">Mã số:' + val.Id + '</p><p class="card-text">Họ tên:' + val.firstname_Student + ' ' + val.lastname_Student + '</p><p class="card-text">Ngày sinh:' + val.birthDay + '</p></div></div>';
+                    });
+                    $("#sortable1").append(items);
+
+                });
+            }
+            else {
+                alert("Vui Lòng Chọn đủ thông tin");
+            }
+        });
+        $('#saveStudentforClass').click(function () {
+            var listClassStudent = [];
+            $.each($('#sortable1 >.card'), function (key, val) {
+              
+                let data = {
+                    StudentId: $(val).attr("studentid"),
+                    ClassId: $('#Class').val(),
+                    YearId: $('#YearId').val(),
+                    
+                }
+              
+                listClassStudent.push(data);
+            }).promise().done(function () {
+                //listClassStudent = JSON.stringify({ "listClassStudent': listClassStudent });
+                $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    type: 'POST',
+                    url: 'https://doantotnghiephutech.azurewebsites.net/api/CommonApi/SaveListStudent/',
+                    data: JSON.stringify(listClassStudent),
+                    success: function (data) {
+                        alert(data);
+                    },
+                    failure: function (response) {
+                        alert("Lưu lớp không thành công");
+                    }
+                }); 
+             });
+            
+        });
+        function checkNull(value) {
+            if (value == null || value == '' || value == undefined) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+     
+    });
+</script>

@@ -23,5 +23,7 @@ namespace DOAN_CHuyenNGanh.Models
         public string phonenumber { get; set; }
         [Required]
         public string job { get; set; }
+        [Required]
+        public string email { get; set; }
     }
 }
